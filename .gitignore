@@ -1,0 +1,7 @@
+# OS generated file
+.DS_Store
+
+# Jupyter files
+*.ipynb
+.ipynb_checkpoints
+
