@@ -1,5 +1,5 @@
 # Fitting the Hill Equation to Experimental Data
-<img align="right" src="https://user-images.githubusercontent.com/31299606/60480084-3566dc00-9cc3-11e9-898d-c637d54a4621.png" width=50%>
+<img align="right" src="https://user-images.githubusercontent.com/31299606/60632514-fc547600-9e40-11e9-9107-0593820bc363.png" width=50%>
 
 Hill equation:<br>
 
@@ -43,11 +43,11 @@ y_data = [
 hill = HillFunctions(x_data,y_data)
 
 # Fitting curve
-x_new = np.linspace(9,18,100)
-y_new = hill.fitting(x_new)
+x_fit = np.linspace(9,18,100)
+y_fit = hill.fitting(x_fit)
 
-plt.plot(x_data,y_data,'co',label='data')
-plt.plot(x_new,y_new,'k',label='fitting curve')
+plt.plot(x_data,y_data,'o',color='b',markeredgecolor='c',label='data')
+plt.plot(x_fit,y_fit,'b',alpha=0.2,solid_capstyle='round',label='curve_fit')
 
 plt.xscale('log')
 plt.xlim(9,20)
