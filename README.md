@@ -20,6 +20,7 @@ Hill equation:<br>
 
 ```python
 %matplotlib inline
+import numpy as np
 from matplotlib import pyplot as plt
 
 # Test Data
@@ -42,7 +43,7 @@ y_data = [
 # Using class: HillFunctions
 hill = HillFunctions(x_data,y_data)
 
-# Fitting curve
+# Curve fitting
 x_fit = np.linspace(9,18,100)
 y_fit = hill.fitting(x_fit)
 
