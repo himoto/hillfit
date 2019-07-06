@@ -13,15 +13,15 @@ Hill equation:<br>
     - numpy
     - scipy
     - matplotlib
-    - jupyter
 
 ## Usage
 
 
 ```python
-%matplotlib inline
 import numpy as np
 from matplotlib import pyplot as plt
+
+from hill_functions import HillFunctions
 
 # Test Data
 x_data = [
