@@ -13,14 +13,13 @@ Hill equation:<br>
     - numpy
     - scipy
     - matplotlib
+    - jupyter
 
 ## Usage
 
 
 ```python
-import numpy as np
-from matplotlib import pyplot as plt
-
+%matplotlib inline
 from hill_functions import HillFunctions
 
 # Test Data
@@ -43,21 +42,7 @@ y_data = [
 # Using class: HillFunctions
 hill = HillFunctions(x_data,y_data)
 
-# Curve fitting
-x_fit = np.linspace(9,18,100)
-y_fit = hill.fitting(x_fit)
-
-plt.plot(x_data,y_data,'o',color='b',markeredgecolor='c',label='data')
-plt.plot(x_fit,y_fit,'b',alpha=0.2,solid_capstyle='round',label='curve_fit')
-
-plt.xscale('log')
-plt.xlim(9,20)
-plt.xticks([10])
-plt.xlabel('x')
-plt.ylabel('y')
-plt.legend(loc='upper left',frameon=False)
-
-plt.show()
+hill.display()
 ```
 
 ## Installation
