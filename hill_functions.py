@@ -5,8 +5,8 @@ from matplotlib import pyplot as plt
 class HillFunctions(object):
 
     def __init__(self,x_data,y_data):
-        self.x_data = x_data
-        self.y_data = y_data
+        self.x_data = x_data # 1d-array
+        self.y_data = y_data # 1d-array
 
     def equation(self,x,top,bottom,K,n):
 
@@ -23,15 +23,15 @@ class HillFunctions(object):
             1
         ]
         param_bounds = (
-            [max_data-0.01*h,min_data-0.01*h,0,0.01],
-            [max_data+0.01*h,min_data+0.01*h,self.x_data[-1],1000]
+            [max_data-h,min_data-h,0,0.01],
+            [max_data+h,min_data+h,self.x_data[-1],1000]
         )
         
         popt,pcov = curve_fit(
             self.equation,self.x_data,self.y_data,
             p0 = param_initial,
             bounds = param_bounds,
-            maxfev = 32767
+            maxfev = np.iinfo(np.int16).max
         )
 
         return popt
