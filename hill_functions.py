@@ -39,7 +39,7 @@ class HillFunctions(object):
     def fitting(self,x_fit):
         popt = self.get_param()
         print(
-            '%s = %e\n%s = %e'\
+            '%s = %.2e\n%s = %.2e'\
             %('EC50',popt[2],'Hill coefficient',popt[3])
         )
 
