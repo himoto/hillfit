@@ -60,7 +60,10 @@ class HillFunctions(object):
 
         plt.xscale('log')
         plt.xlim(self.x_data[0],self.x_data[-1])
-        plt.xticks([self.x_data[0],EC50,self.x_data[-1]])
+        plt.xticks(
+            [self.x_data[0],EC50,self.x_data[-1]],
+            ['%.2e'%(self.x_data[0]),'%.2e'%(EC50),'%.2e'%(self.x_data[-1])]
+        )
         plt.xlabel('x')
         plt.ylabel('y')
         plt.legend(loc='upper left',frameon=False)
