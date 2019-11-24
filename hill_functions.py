@@ -52,11 +52,15 @@ class HillFunctions(object):
         plt.figure(figsize=(8,6))
         plt.rcParams['font.size'] = 20
         plt.rcParams['axes.linewidth'] = 2
-        plt.rcParams['lines.linewidth'] = 6
+        plt.rcParams['lines.linewidth'] = 4
         plt.rcParams['lines.markersize'] = 10
 
-        plt.plot(self.x_data,self.y_data,'o',color='b',markeredgecolor='c',label='data',clip_on=False)
-        plt.plot(x_fit,y_fit,'b',alpha=0.2,solid_capstyle='round',label='curve_fit',clip_on=False)
+        plt.plot(
+            self.x_data,self.y_data,'o',color='b',markeredgecolor='c',label='data',clip_on=False
+        )
+        plt.plot(
+            x_fit,y_fit,'b',alpha=0.2,solid_capstyle='round',label='curve_fit',clip_on=False
+        )
 
         plt.xscale('log')
         plt.xlim(self.x_data[0],self.x_data[-1])
