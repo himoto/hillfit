@@ -1,5 +1,5 @@
 # Fitting the Hill Equation to Experimental Data
-<img align="right" src="https://user-images.githubusercontent.com/31299606/60632514-fc547600-9e40-11e9-9107-0593820bc363.png" width=50%>
+<img align="right" src=hill_fitting.png width=50%>
 
 Hill equation:<br>
 

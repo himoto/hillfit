@@ -8,11 +8,11 @@ class HillFunctions(object):
         self.x_data = x_data # 1d-array
         self.y_data = y_data # 1d-array
 
-    def equation(self,x,top,bottom,K,n):
+    def _equation(self,x,top,bottom,K,n):
 
         return bottom + (top-bottom)*x**n/(K**n+x**n)
 
-    def get_param(self):
+    def _get_param(self):
         min_data = np.amin(self.y_data)
         max_data = np.amax(self.y_data)
         h = abs(max_data - min_data)
@@ -28,7 +28,7 @@ class HillFunctions(object):
         )
         
         popt,pcov = curve_fit(
-            self.equation,self.x_data,self.y_data,
+            self._equation,self.x_data,self.y_data,
             p0 = param_initial,
             bounds = param_bounds,
             maxfev = np.iinfo(np.int16).max
@@ -36,20 +36,20 @@ class HillFunctions(object):
 
         return popt
 
-    def fitting(self,x_fit):
-        popt = self.get_param()
+    def _fitting(self,x_fit):
+        popt = self._get_param()
         print(
             '%s = %.2e\n%s = %.2e'\
             %('EC50',popt[2],'Hill coefficient',popt[3])
         )
 
-        return self.equation(x_fit,popt[0],popt[1],popt[2],popt[3]),popt[2]
+        return self._equation(x_fit,popt[0],popt[1],popt[2],popt[3]),popt[2]
 
     def display(self):
         x_fit = np.linspace(self.x_data[0],self.x_data[-1],100)
-        y_fit,EC50 = self.fitting(x_fit)
+        y_fit,EC50 = self._fitting(x_fit)
 
-        plt.figure(figsize=(9,6))
+        plt.figure(figsize=(8,6))
         plt.rcParams['font.size'] = 20
         plt.rcParams['axes.linewidth'] = 2
         plt.rcParams['lines.linewidth'] = 6
@@ -71,4 +71,4 @@ class HillFunctions(object):
         plt.gca().spines['right'].set_visible(False)
         plt.gca().spines['top'].set_visible(False)
 
-        plt.show()
+        plt.savefig('./hill_fitting.png',bbox_iches='tight')
