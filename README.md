@@ -5,7 +5,7 @@ Hill equation:<br>
 
 *y = bottom + (top-bottom) · x<sup>n</sup> / (K</sub><sup>n</sup> + x<sup>n</sup>)*
 
-- ***K*** is the concentration of *x* that produce a 50% maximal response
+- ***K*** is the concentration of *x* producing 50% maximal response
 - ***n*** is the Hill coefficient
 
 ## Requirements
