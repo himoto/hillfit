@@ -42,7 +42,7 @@ y_data = [
 # Using class: HillFunctions
 hill = HillFunctions(x_data,y_data)
 
-hill.display()
+hill.fitting()
 ```
 
 ## Installation
