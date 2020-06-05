@@ -36,7 +36,7 @@ class HillFunctions(object):
 
         return popt
 
-    def _fitting(self, x_fit):
+    def _get_yfit(self, x_fit):
         popt = self._get_param()
         print(
             '%s = %.2e\n%s = %.2e' % (
@@ -48,7 +48,7 @@ class HillFunctions(object):
 
     def fitting(self):
         x_fit = np.linspace(self.x_data[0], self.x_data[-1], 100)
-        y_fit, EC50 = self._fitting(x_fit)
+        y_fit, EC50 = self._get_yfit(x_fit)
 
         plt.figure(figsize=(8, 6))
         # rcParams
