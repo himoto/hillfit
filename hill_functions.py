@@ -89,7 +89,9 @@ class HillFunctions(object):
             xticks=[],
             yticks=[],
     ):
-        x_fit = np.linspace(self.x_data[0], self.x_data[-1], 100000)
+        x_fit = np.logspace(
+            np.log10(self.x_data[0]), np.log10(self.x_data[-1]), 1000
+        )
         y_fit, EC50 = self._get_yfit(x_fit)
 
         plt.figure(figsize=figsize)
