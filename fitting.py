@@ -2,7 +2,7 @@ import numpy as np
 from scipy.optimize import curve_fit
 from matplotlib import pyplot as plt
 
-class HillFunctions(object):
+class FittingHillEq(object):
     """ Fitting the Hill Equation to Experimental Data
 
     Parameters
@@ -74,11 +74,13 @@ class HillFunctions(object):
     @staticmethod
     def _my_rc_params():
         plt.rcParams['font.size'] = 20
-        plt.rcParams['axes.linewidth'] = 2
+        plt.rcParams['axes.linewidth'] = 1.5
+        plt.rcParams['xtick.major.width'] = 1.5
+        plt.rcParams['ytick.major.width'] = 1.5
         plt.rcParams['lines.linewidth'] = 4
         plt.rcParams['lines.markersize'] = 10
 
-    def fitting(
+    def plot_curve(
             self,
             color='b',
             figsize=(8, 6),

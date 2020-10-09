@@ -20,7 +20,7 @@ Hill equation:<br>
 
 ```python
 %matplotlib inline
-from hill_functions import HillFunctions
+from fitting import FittingHillEq
 
 # Test Data
 x_data = [
@@ -39,10 +39,10 @@ y_data = [
     95.902, 96.396, 97.872, 98.246, 100.000
 ]
 
-# Using class: HillFunctions
-hill = HillFunctions(x_data, y_data, y_error=[])
+# Using class: FittingHillEq
+model = FittingHillEq(x_data, y_data, y_error=[])
 
-hill.fitting(
+model.plot_curve(
     color='b',
     figsize=(8,6),
     xlabel='Dose (AU)',
