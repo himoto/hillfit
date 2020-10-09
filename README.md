@@ -40,9 +40,14 @@ y_data = [
 ]
 
 # Using class: HillFunctions
-hill = HillFunctions(x_data,y_data)
+hill = HillFunctions(x_data, y_data, y_error=[])
 
-hill.fitting()
+hill.fitting(
+    color='b',
+    figsize=(8,6),
+    xlabel='Dose (AU)',
+    ylabel='Response (AU)',
+)
 ```
 
 ## Installation
