@@ -142,4 +142,4 @@ class HillFunctions(object):
         plt.gca().spines['right'].set_visible(False)
         plt.gca().spines['top'].set_visible(False)
 
-        plt.savefig('./hill_fitting.png', bbox_iches='tight')
+        plt.savefig('./hill_fitting.png', dpi=300, bbox_iches='tight')
