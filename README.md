@@ -1,4 +1,6 @@
 # Fitting the Hill Equation to Experimental Data
+[![Actions Status](https://github.com/himoto/fitting_hilleq/workflows/Python%20package/badge.svg)](https://github.com/himoto/fitting_hilleq/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 <img align="right" src=image/hill_fitting.png width=50%>
 
 Hill equation:<br>
@@ -51,7 +53,3 @@ model.plot_curve(
 
 ## Installation
     $ git clone https://github.com/himoto/fitting_hilleq.git
-
-
-## License
-[MIT](/LICENSE)
