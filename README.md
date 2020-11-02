@@ -1,5 +1,5 @@
 # Fitting the Hill Equation to Experimental Data
-<img align="right" src=hill_fitting.png width=50%>
+<img align="right" src=image/hill_fitting.png width=50%>
 
 Hill equation:<br>
 
@@ -13,7 +13,6 @@ Hill equation:<br>
     - numpy
     - scipy
     - matplotlib
-    - jupyter
 
 ## Usage
 
