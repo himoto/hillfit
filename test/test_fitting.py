@@ -1,3 +1,5 @@
+from math import fabs
+
 import numpy as np
 from hillfit import HillFit
 
@@ -19,6 +21,9 @@ def test_plot():
     ]
     model = HillFit(x_data, y_data)
     x_fit, y_fit = model.fitting()
+
+    assert fabs(model.params.EC50 - 12.94410262619117) < 1e-3
+
     assert np.allclose(
         x_fit,
         [

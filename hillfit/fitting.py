@@ -44,6 +44,7 @@ class HillFit(object):
     ) -> None:
         self.x_data = x_data
         self.y_data = y_data
+        self.params = Params(0, 0, 0, 0)
 
     def _equation(self, x, *params):
         """
@@ -54,7 +55,7 @@ class HillFit(object):
         )
         return hilleq
 
-    def _get_param(self) -> Params:
+    def _get_params(self) -> None:
         """
         Use ``scipy.optimize.curve_fit()`` to estimate parameters.
         """
@@ -74,8 +75,7 @@ class HillFit(object):
             p0=param_initial,
             bounds=param_bounds,
         )
-        params = Params(*popt)
-        return params
+        self.params = Params(*popt)
 
     def fitting(self, num: int = 1000, show_popt: bool = True) -> Tuple[np.ndarray, np.ndarray]:
         """
@@ -114,9 +114,9 @@ class HillFit(object):
         >>> plt.legend()
         >>> plt.show()
         """
-        popt = self._get_param()
+        self._get_params()
         if show_popt:
-            print(popt)
+            print(self.params)
         x_fit = np.logspace(np.log10(self.x_data[0]), np.log10(self.x_data[-1]), num)
-        y_fit = self._equation(x_fit, *popt)
+        y_fit = self._equation(x_fit, *self.params)
         return x_fit, y_fit
