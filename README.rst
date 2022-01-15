@@ -1,14 +1,3 @@
-Metadata-Version: 2.1
-Name: Hillfit
-Version: 0.0.4
-Summary: Model for fitting data with the Hill equation, and exporting the contents
-Home-page: https://github.com/freiburgermsu/hillfit
-Author: Andrew Freiburger, and Hiroaki Imoto
-Author-email: andrewfreiburger@gmail.com
-License: GNU
-Keywords: biochemistry,systems biology,computational biology,data science
-Platform: UNKNOWN
-
 Fitting data to the Hill equation
 --------------------------------------------------
 
@@ -79,5 +68,3 @@ Hillfit is executed through the following sequence of the aforementioned functio
  model.fitting(self, x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', 
  sigfigs = 6, view_figure = True)
  model.export(self, export_path = None, export_name = None)
-
-

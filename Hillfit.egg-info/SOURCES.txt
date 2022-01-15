@@ -1,5 +1,4 @@
-LICENSE
-README.md
+README.rst
 setup.py
 Hillfit.egg-info/PKG-INFO
 Hillfit.egg-info/SOURCES.txt
