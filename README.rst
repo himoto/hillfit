@@ -39,8 +39,8 @@ fitting()
 
 The parameterized data is fitted to the Hill equation, with the following arguments and their default values::
 
- model.fitting(self, x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', 
- sigfigs = 6, view_figure = True)
+ model.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', 
+               sigfigs = 6, view_figure = True)
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
@@ -53,7 +53,7 @@ export()
 
 The fitted Hill equation, with its data points and parameters, and the regression information are exported to a designated folder through the following syntax and arguments::
 
- model.export(self, export_path = None, export_name = None)
+ model.export(export_path = None, export_name = None)
 
 - *export_path* ``str``: optionally specifies a path to where the content will be exported, where `None` selects the current working directory.
 - *export_name* ``str``: optionally specifies a name for the folder of exported content, where `None` enables the code to design a unique folder name for the information.
@@ -65,6 +65,6 @@ Hillfit is executed through the following sequence of the aforementioned functio
  
  import hillfit
  model = hillfit.HillFit(x_data, y_data)
- model.fitting(self, x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', 
- sigfigs = 6, view_figure = True)
- model.export(self, export_path = None, export_name = None)
+ model.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', 
+               sigfigs = 6, view_figure = True)
+ model.export(export_path = None, export_name = None)
