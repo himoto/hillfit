@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+Hillfit.egg-info/PKG-INFO
+Hillfit.egg-info/SOURCES.txt
+Hillfit.egg-info/dependency_links.txt
+Hillfit.egg-info/requires.txt
+Hillfit.egg-info/top_level.txt
+hillfit/__init__.py
+hillfit/fitting.py
+test/__init__.py
+test/test_fitting.py

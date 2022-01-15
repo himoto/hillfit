@@ -1,3 +1,15 @@
+Metadata-Version: 2.1
+Name: Hillfit
+Version: 0.0.1
+Summary: Model for fitting data with the Hill equation, and exporting the contents
+Home-page: https://github.com/freiburgermsu/hillfit
+Author: Andrew Freiburger, and Hiroaki Imoto
+Author-email: andrewfreiburger@gmail.com, and himoto@protein.osaka-u.ac.jp
+License: MIT
+Keywords: biochemistry,systems biology,computational biology,data science
+Platform: UNKNOWN
+License-File: LICENSE
+
 # Fitting the Hill Equation to Experimental Data
 
 [![Actions Status](https://github.com/himoto/hillfit/workflows/Python%20package/badge.svg)](https://github.com/himoto/hillfit/actions)
@@ -53,3 +65,5 @@ plt.show()
 ## License
 
 MIT
+
+
