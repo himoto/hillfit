@@ -1,4 +1,4 @@
-name: Test ROSSpy
+name: Test HillFit
 on:
   push:
     branches:
