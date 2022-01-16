@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
+from pathlib import Path
 
 with open('README.rst', encoding='utf-8') as file:
     readme = file.read()
     
 setup(
-  name = 'Hillfit',      
+  name = 'hillfit',      
   package_dir = {'fitting':'hillfit'},
   packages = find_packages(),
   version = '0.0.6',
@@ -16,5 +17,5 @@ setup(
   author_email = ','.join(['andrewfreiburger@gmail.com', 'himoto@protein.osaka-u.ac.jp']),
   url = 'https://github.com/freiburgermsu/hillfit',   
   keywords = ['biochemistry', 'systems biology', 'computational biology', 'data science', 'Hill equation'],
-  install_requires = ['matplotlib', 'numpy', 'sklearn', 'scipy', 'pandas', 'sigfig']
+  install_requires = [l.strip() for l in Path("requirements.txt").read_text("utf-8").splitlines()],
 )
