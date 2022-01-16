@@ -1,0 +1,26 @@
+name: Test ROSSpy
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install Pip, pytest, hillfit
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install hillfit
+          pip show hillfit
+      - name: Run tests
+        run: python -m pytest c:\hostedtoolcache\windows\python\3.9.9\x64\lib\site-packages\hillfit\test\test_fitting.py
