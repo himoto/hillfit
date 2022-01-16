@@ -1,72 +1,36 @@
-from typing import NamedTuple, Tuple, Union
-
-import numpy as np
+from numpy import array, amin, amax, logspace, log10
 from scipy.optimize import curve_fit
-
-
-class Params(NamedTuple):
-    """
-    Parameters
-    ----------
-    bottom
-        Minimum activity.
-    top
-        Maximum activity.
-    EC50
-        Half-maximum effective dose.
-    nH
-        Hill coefficient.
-    """
-
-    top: float
-    bottom: float
-    EC50: float
-    nH: float
-
+from matplotlib import pyplot
+from sklearn.metrics import r2_score
+from datetime import date
+from sigfig import round
+from pandas import DataFrame
+import re, os
 
 class HillFit(object):
-    """
-    Fitting the Hill Equation to Experimental Data.
-
-    Attributes
-    ----------
-    x_data : 1d-array
-        The independent variable where the data is measured.
-
-    y_data : 1d-array
-        The dependent data.
-    """
-
-    def __init__(
-        self,
-        x_data: Union[list, np.ndarray],
-        y_data: Union[list, np.ndarray],
-    ) -> None:
-        self.x_data = x_data
-        self.y_data = y_data
+    def __init__(self, x_data, y_data):
+        self.x_data = array(x_data)
+        self.y_data = array(y_data)
 
     def _equation(self, x, *params):
-        """
-        Hill equation.
-        """
-        hilleq = params[1] + (params[0] - params[1]) * x ** params[3] / (
-            params[2] ** params[3] + x ** params[3]
-        )
+        self.top = params[0]
+        self.bottom = params[1]
+        self.ec50 = params[2]
+        self.nH = params[3]
+        
+        hilleq = self.bottom + (self.top - self.bottom)*x**self.nH / (self.ec50**self.nH + x**self.nH)
         return hilleq
 
-    def _get_param(self) -> Params:
-        """
-        Use ``scipy.optimize.curve_fit()`` to estimate parameters.
-        """
-        min_data = np.amin(self.y_data)
-        max_data = np.amax(self.y_data)
+    def _get_param(self):
+        min_data = amin(self.y_data)
+        max_data = amax(self.y_data)
         h = abs(max_data - min_data)
         param_initial = [max_data, min_data, 0.5 * (self.x_data[-1] - self.x_data[0]), 1]
         param_bounds = (
             [max_data - 0.5 * h, min_data - 0.5 * h, self.x_data[0] * 0.1, 0.01],
             [max_data + 0.5 * h, min_data + 0.5 * h, self.x_data[-1] * 10, 100],
         )
-
+        
         popt, _ = curve_fit(
             self._equation,
             self.x_data,
@@ -74,49 +38,81 @@ class HillFit(object):
             p0=param_initial,
             bounds=param_bounds,
         )
-        params = Params(*popt)
-        return params
-
-    def fitting(self, num: int = 1000, show_popt: bool = True) -> Tuple[np.ndarray, np.ndarray]:
-        """
-        Parameters
-        ----------
-        num : int (default: 1000)
-            Number of samples to generate. Default is 1000.
-        show_popt : bool (default: :obj:`True`)
-            Whether to show the estimation result.
+        return [float(param) for param in popt]
+    
+    def regression(self, x_fit, y_fit, view_figure, x_label, y_label, title, *params):        
+        corrected_y_data = self._equation(self.x_data, *params)
+        r_2 = r2_score(self.y_data, corrected_y_data)        
+        r_sqr = 'R\N{superscript two}: ' + f'{round(r_2, 6)}'
         
-        Examples
-        --------
-        >>> import matplotlib.pyplot as plt
-        >>> from hillfit import HillFit
-        >>> x_data = [
-        ...     9.210, 10.210, 10.580, 10.830, 11.080,
-        ...     11.330, 11.580, 11.830, 12.080, 12.330,
-        ...     12.580, 12.830, 13.080, 13.330, 13.580,
-        ...     13.830, 14.080, 14.330, 14.580, 14.830,
-        ...     15.080, 15.330, 15.580, 15.830, 17.580
-        ... ]
-        >>> y_data = [
-        ...     0.000, 0.000, 0.000, 1.667, 2.222,
-        ...     5.682, 9.524, 15.315, 16.000, 31.183,
-        ...     39.000, 47.222, 47.475, 63.208, 77.143,
-        ...     75.214, 80.612, 92.784, 94.167, 93.137,
-        ...     95.902, 96.396, 97.872, 98.246, 100.000
-        ... ]
-        >>> model = HillFit(x_data, y_data)
-        >>> x_fit, y_fit = model.fitting()
-        >>> plt.plot(x_data, y_data, 'bo', markerfacecolor='None', markeredgecolor='b', label='data', clip_on=False)
-        >>> plt.plot(x_fit, y_fit, 'b', alpha=0.2, solid_capstyle='round', label='curve_fit', clip_on=False)
-        >>> plt.xscale('log')
-        >>> plt.xlabel('Dose (AU)')
-        >>> plt.ylabel('Response (AU)')
-        >>> plt.legend()
-        >>> plt.show()
-        """
-        popt = self._get_param()
-        if show_popt:
-            print(popt)
-        x_fit = np.logspace(np.log10(self.x_data[0]), np.log10(self.x_data[-1]), num)
-        y_fit = self._equation(x_fit, *popt)
-        return x_fit, y_fit
+        pyplot.rcParams['figure.figsize'] = (11, 7)
+        pyplot.rcParams['figure.dpi'] = 150
+        self.figure, ax = pyplot.subplots()
+        ax.plot(x_fit, y_fit, label = 'Hill fit')
+        ax.scatter(self.x_data, self.y_data, label = 'raw_data')
+        ax.set_xlabel(x_label)
+        ax.set_ylabel(y_label)
+        ax.set_title(title)
+        ax.text(0.1, 0.95, r_sqr)
+        ax.legend(loc = 'lower right')
+        
+        if view_figure:
+            self.figure.show()
+
+    def fitting(self, x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True):
+        self.x_fit = logspace(log10(self.x_data[0]), log10(self.x_data[-1]), len(self.y_data))        
+        params = self._get_param()
+        self.y_fit = self._equation(self.x_fit, *params)
+        self.equation = f'{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})'
+        
+        self.regression(self.x_fit, self.y_fit, view_figure, x_label, y_label, title, *params)
+        
+        return self.x_fit, self.y_fit, params, self.equation
+    
+    def export(self, export_directory = None, export_name = None):
+        # define the unique export path
+        if export_directory is None:
+            export_directory = os.getcwd()
+            
+        if export_name is None:
+            export_name = '-'.join([re.sub(' ', '_', str(x)) for x in [date.today(), 'Hillfit']])
+            count = 0
+            export_path = os.path.join(export_directory, export_name) 
+            while os.path.exists(export_path):
+                count += 1
+                export_name = re.sub('([0-9]+)$', str(count), export_name)
+                if not re.search('(-[0-9]+$)', export_name):
+                    export_name += f'-{count}'
+                export_path = os.path.join(export_directory, export_name)       
+            os.mkdir(export_path)
+        else:
+            export_path = os.path.join(export_directory, export_name) 
+            count = 0
+            while os.path.exists(export_path):
+                if not re.search('-[0-9]+\..+', export_path):
+                    export_path = re.sub('(\..+)', f'-{count}\..+', export_path)
+                else:
+                    export_path = re.sub('-[0-9]+', f'-{count}\..+', export_path)
+                count += 1
+            os.mkdir(export_path)
+            
+        # export the figure
+        self.figure.savefig(os.path.join(export_path, 'regression.svg'))
+        
+        # export the raw data        
+        df = DataFrame(index = range(len(self.x_data)))
+        df['x'] = self.x_data
+        df['y'] = self.y_data
+        df.to_csv(os.path.join(export_path, 'raw_data.csv'))
+        
+        # export the fitted data
+        df2 = DataFrame(index = range(len(self.x_fit)))
+        df2['x_fit'] = self.x_fit
+        df2['y_fit'] = self.y_fit
+        df2.to_csv(os.path.join(export_path, 'fitted_data.csv'))
+        
+        # export the fitted equation
+        formatted_equation = re.sub('(\*\*)', '^', self.equation)
+        string = '\n'.join([f'Fitted Hill equation: {formatted_equation}', f'top = {self.top}', f'bottom = {self.bottom}', f'ec50 = {self.ec50}', f'nH = {self.nH}'])
+        with open(os.path.join(export_path, 'equation.txt'), 'w') as output:
+            output.writelines(string)
