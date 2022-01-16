@@ -12,8 +12,8 @@ setup(
   license = 'MIT',
   description = "Model for fitting data with the Hill equation, and exporting the contents", 
   long_description = readme,
-  author = 'Andrew Freiburger',               
-  author_email = 'andrewfreiburger@gmail.com',
+  author = ','.join(['Andrew Freiburger', 'Hiroaki Imoto']),               
+  author_email = ','.join(['andrewfreiburger@gmail.com', 'himoto@protein.osaka-u.ac.jp']),
   url = 'https://github.com/freiburgermsu/hillfit',   
   keywords = ['biochemistry', 'systems biology', 'computational biology', 'data science', 'Hill equation'],
   install_requires = ['matplotlib', 'numpy', 'sklearn', 'scipy', 'pandas', 'sigfig']
