@@ -60,7 +60,7 @@ def test_export():
     hf.export()
     
     # affirm module qualities    
-    export_path = os.path.join(os.path.dirname(__file__), f'{date.today()}-Hillfit') 
+    export_path = os.path.join(os.getcwd(), f'{date.today()}-Hillfit') 
     for export_item in ['regression.svg', 'equation.txt', 'fitted_data.csv', 'raw_data.csv']:
         assert os.path.exists(os.path.join(export_path, export_item))
    
