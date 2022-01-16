@@ -1,7 +1,7 @@
 import os
 import re
 from datetime import date
-from typing import List, Union, Optional
+from typing import List, Optional, Union
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -12,7 +12,6 @@ from sklearn.metrics import r2_score
 
 
 class HillFit(object):
-
     def __init__(
         self,
         x_data: Union[List[float], np.ndarray],
@@ -78,7 +77,9 @@ class HillFit(object):
         sigfigs: int = 6,
         view_figure: bool = True,
     ):
-        self.x_fit = np.logspace(np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data))
+        self.x_fit = np.logspace(
+            np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data)
+        )
         params = self._get_param()
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
