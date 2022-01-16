@@ -1,9 +1,10 @@
 import os
 import re
 from datetime import date
+from typing import List, Union, Optional
 
-from matplotlib import pyplot
-from numpy import amax, amin, array, log10, logspace
+import numpy as np
+from matplotlib import pyplot as plt
 from pandas import DataFrame
 from scipy.optimize import curve_fit
 from sigfig import round
@@ -11,11 +12,16 @@ from sklearn.metrics import r2_score
 
 
 class HillFit(object):
-    def __init__(self, x_data, y_data):
-        self.x_data = array(x_data)
-        self.y_data = array(y_data)
 
-    def _equation(self, x, *params):
+    def __init__(
+        self,
+        x_data: Union[List[float], np.ndarray],
+        y_data: Union[List[float], np.ndarray],
+    ) -> None:
+        self.x_data = np.array(x_data)
+        self.y_data = np.array(y_data)
+
+    def _equation(self, x: np.ndarray, *params) -> np.ndarray:
         self.top = params[0]
         self.bottom = params[1]
         self.ec50 = params[2]
@@ -26,9 +32,9 @@ class HillFit(object):
         )
         return hilleq
 
-    def _get_param(self):
-        min_data = amin(self.y_data)
-        max_data = amax(self.y_data)
+    def _get_param(self) -> List[float]:
+        min_data = np.amin(self.y_data)
+        max_data = np.amax(self.y_data)
         h = abs(max_data - min_data)
         param_initial = [max_data, min_data, 0.5 * (self.x_data[-1] - self.x_data[0]), 1]
         param_bounds = (
@@ -50,9 +56,9 @@ class HillFit(object):
         r_2 = r2_score(self.y_data, corrected_y_data)
         r_sqr = "R\N{superscript two}: " + f"{round(r_2, 6)}"
 
-        pyplot.rcParams["figure.figsize"] = (11, 7)
-        pyplot.rcParams["figure.dpi"] = 150
-        self.figure, ax = pyplot.subplots()
+        plt.rcParams["figure.figsize"] = (11, 7)
+        plt.rcParams["figure.dpi"] = 150
+        self.figure, ax = plt.subplots()
         ax.plot(x_fit, y_fit, label="Hill fit")
         ax.scatter(self.x_data, self.y_data, label="raw_data")
         ax.set_xlabel(x_label)
@@ -65,9 +71,14 @@ class HillFit(object):
             self.figure.show()
 
     def fitting(
-        self, x_label="x", y_label="y", title="Fitted Hill equation", sigfigs=6, view_figure=True
+        self,
+        x_label: str = "x",
+        y_label: str = "y",
+        title: str = "Fitted Hill equation",
+        sigfigs: int = 6,
+        view_figure: bool = True,
     ):
-        self.x_fit = logspace(log10(self.x_data[0]), log10(self.x_data[-1]), len(self.y_data))
+        self.x_fit = np.logspace(np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data))
         params = self._get_param()
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
@@ -76,7 +87,7 @@ class HillFit(object):
 
         return self.x_fit, self.y_fit, params, self.equation
 
-    def export(self, export_directory=None, export_name=None):
+    def export(self, export_directory: Optional[str] = None, export_name: Optional[str] = None):
         # define the unique export path
         if export_directory is None:
             export_directory = os.getcwd()
