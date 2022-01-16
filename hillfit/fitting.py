@@ -1,4 +1,4 @@
-from numpy import ndarray, amin, amax, logspace, log10
+from numpy import array, amin, amax, logspace, log10
 from scipy.optimize import curve_fit
 from matplotlib import pyplot
 from sklearn.metrics import r2_score
@@ -9,8 +9,8 @@ import re, os
 
 class HillFit(object):
     def __init__(self, x_data, y_data):
-        self.x_data = x_data
-        self.y_data = y_data
+        self.x_data = array(x_data)
+        self.y_data = array(y_data)
 
     def _equation(self, x, *params):
         self.top = params[0]
@@ -112,7 +112,7 @@ class HillFit(object):
         df2.to_csv(os.path.join(export_path, 'fitted_data.csv'))
         
         # export the fitted equation
-        formatted_equation = re.sub('(**)', '^', self.equation)
+        formatted_equation = re.sub('(\*\*)', '^', self.equation)
         string = '\n'.join([f'Fitted Hill equation: {formatted_equation}', f'top = {self.top}', f'bottom = {self.bottom}', f'ec50 = {self.ec50}', f'nH = {self.nH}'])
         with open(os.path.join(export_path, 'equation.txt'), 'w') as output:
             output.writelines(string)
