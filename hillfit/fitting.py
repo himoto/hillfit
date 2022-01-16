@@ -63,7 +63,7 @@ class HillFit(object):
         self.x_fit = logspace(log10(self.x_data[0]), log10(self.x_data[-1]), len(self.y_data))        
         params = self._get_param()
         self.y_fit = self._equation(self.x_fit, *params)
-        self.equation = f'{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x^{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}^{(round(self.nH, sigfigs))} + x^{(round(self.nH, sigfigs))})'
+        self.equation = f'{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})'
         
         self.regression(self.x_fit, self.y_fit, view_figure, x_label, y_label, title, *params)
         
@@ -112,6 +112,7 @@ class HillFit(object):
         df2.to_csv(os.path.join(export_path, 'fitted_data.csv'))
         
         # export the fitted equation
-        string = '\n'.join([f'Fitted Hill equation: {self.equation}', f'top = {self.top}', f'bottom = {self.bottom}', f'ec50 = {self.ec50}', f'nH = {self.nH}'])
+        formatted_equation = re.sub('(**)', '^', self.equation)
+        string = '\n'.join([f'Fitted Hill equation: {formatted_equation}', f'top = {self.top}', f'bottom = {self.bottom}', f'ec50 = {self.ec50}', f'nH = {self.nH}'])
         with open(os.path.join(export_path, 'equation.txt'), 'w') as output:
             output.writelines(string)
