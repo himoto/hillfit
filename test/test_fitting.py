@@ -2,7 +2,7 @@ import os
 from datetime import date
 from shutil import rmtree
 
-from numpy import ndarray
+import numpy as np
 from sigfig import round
 
 from hillfit import HillFit
@@ -125,7 +125,7 @@ def test_init():
 
     # affirm module qualities
     for ary in [hf.x_data, hf.y_data]:
-        assert type(ary) is ndarray
+        assert isinstance(ary, np.ndarray)
 
 
 def test_fitting():
@@ -135,11 +135,11 @@ def test_fitting():
     # affirm module qualities
     x = 6
     assert eval(eq)
-    assert type(eq) is str
+    assert isinstance(eq, str)
 
-    assert type(params) is list
-    assert type(x_fit) is ndarray
-    assert type(y_fit) is ndarray
+    assert isinstance(params, list)
+    assert isinstance(x_fit, np.ndarray)
+    assert isinstance(y_fit, np.ndarray)
 
     for entry in list(x_fit):
         index = list(x_fit).index(entry)
