@@ -9,7 +9,7 @@ setup(
   package_dir = {'fitting':'hillfit'},
   packages = find_packages(),
   version = '0.0.6',
-  license = 'GNU',
+  license = 'MIT',
   description = "Model for fitting data with the Hill equation, and exporting the contents", 
   long_description = readme,
   author = 'Andrew Freiburger',               
