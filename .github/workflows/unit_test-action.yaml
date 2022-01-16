@@ -23,4 +23,4 @@ jobs:
           pip install hillfit
           pip show hillfit
       - name: Run tests
-        run: python -m pytest c:\hostedtoolcache\windows\python\3.9.9\x64\lib\site-packages\hillfit\test\test_fitting.py
+        run: python -m pytest c:\hostedtoolcache\windows\python\3.9.9\x64\lib\site-packages\hillfit\hillfit\test\test_fitting.py
