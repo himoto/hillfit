@@ -69,20 +69,24 @@ class HillFit(object):
         
         return self.x_fit, self.y_fit, params, self.equation
     
-    def export(self, export_path = None, export_name = None):
+    def export(self, export_directory = None, export_name = None):
         # define the unique export path
-        if export_path is None:
-            if export_name is None:
-                export_name = '-'.join([re.sub(' ', '_', str(x)) for x in [date.today(), 'Hillfit']])
+        if export_directory is None:
+            export_directory = os.getcwd()
+            
+        if export_name is None:
+            export_name = '-'.join([re.sub(' ', '_', str(x)) for x in [date.today(), 'Hillfit']])
             count = 0
-            while os.path.exists(export_name):
+            export_path = os.path.join(export_directory, export_name) 
+            while os.path.exists(export_path):
                 count += 1
                 export_name = re.sub('([0-9]+)$', str(count), export_name)
                 if not re.search('(-[0-9]+$)', export_name):
                     export_name += f'-{count}'
-            export_path = os.path.join(os.getcwd(), export_name)        
+                export_path = os.path.join(export_directory, export_name)       
             os.mkdir(export_path)
         else:
+            export_path = os.path.join(export_directory, export_name) 
             count = 0
             while os.path.exists(export_path):
                 if not re.search('-[0-9]+\..+', export_path):
