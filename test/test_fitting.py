@@ -152,10 +152,10 @@ def test_export():
     hf = HillFit(x_data, y_data)
     hf.fitting()
     # affirm module qualities
-    export_path = f"{date.today()}-Hillfit"
-    hf.export(export_directory=export_path)
+    export_name = "hillfit-regression"
+    hf.export(export_name=export_name)
     for export_item in ["regression.svg", "equation.txt", "fitted_data.csv", "raw_data.csv"]:
-        assert os.path.exists(os.path.join(export_path, export_item))
+        assert os.path.exists(os.path.join(export_name, export_item))
 
     # delete the directory
-    rmtree(export_path)
+    rmtree(export_name)
