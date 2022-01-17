@@ -53,7 +53,7 @@ The parameterized data is fitted to the Hill equation, with the following argume
 ----------------
 self-accessible
 ----------------
-**Note**: Many data sets and exported components of the fitted information are accessible through the hillfit model object. 
+Many data sets and exported components of the fitted information are accessible through the hillfit model object. 
 
 - *top*, *bottom*, *ec50*, & *nH* ``float``: The fitted parameters of the Hill equation are accessible via ``hf.top``, ``hf.bottom``, ``hf.ec50``, & ``hf.nH``, respectively.
 - *fitted_xs* & *fitted_ys* ``list``: The x- and y-values of the fitted Hill equation are accessible via ``hf.x_fit`` & ``hf.y_fit``, respectively.
