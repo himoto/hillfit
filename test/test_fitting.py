@@ -43,8 +43,9 @@ def test_fitting():
     assert type(hf.equation) is str
     assert type(hf.x_fit) is ndarray
     assert type(hf.y_fit) is ndarray
-    for quant in [hf.r_2, hf.top, hf.bottom, hf.ec50, hf.nH]:
-        assert type(quant) is float64
+    assert type(hf.r_2) is float64
+    for quant in [hf.top, hf.bottom, hf.ec50, hf.nH]:
+        assert type(quant) is float
 
     for entry in list(hf.x_fit):
         index = list(hf.x_fit).index(entry)
