@@ -70,29 +70,19 @@ class HillFit(object):
     def export(self, export_directory = None, export_name = None):
         # define the unique export path
         if export_directory is None:
-            export_directory = os.getcwd()
-            
+            export_directory = os.getcwd()    
         if export_name is None:
             export_name = '-'.join([re.sub(' ', '_', str(x)) for x in ['Hillfit', 'reg']])
-            count = 0
-            export_path = os.path.join(export_directory, export_name) 
-            while os.path.exists(export_path):
-                count += 1
-                export_name = re.sub('([0-9]+)$', str(count), export_name)
-                if not re.search('(-[0-9]+$)', export_name):
-                    export_name += f'-{count}'
-                export_path = os.path.join(export_directory, export_name)       
-            os.mkdir(export_path)
-        else:
-            export_path = os.path.join(export_directory, export_name) 
-            count = 0
-            while os.path.exists(export_path):
-                if not re.search('-[0-9]+\..+', export_path):
-                    export_path = re.sub('(\..+)', f'-{count}\..+', export_path)
-                else:
-                    export_path = re.sub('-[0-9]+', f'-{count}\..+', export_path)
-                count += 1
-            os.mkdir(export_path)
+
+        count = 0
+        export_path = os.path.join(export_directory, export_name) 
+        while os.path.exists(export_path):
+            count += 1
+            export_name = re.sub('([0-9]+)$', str(count), export_name)
+            if not re.search('(-[0-9]+$)', export_name):
+                export_name += f'-{count}'
+            export_path = os.path.join(export_directory, export_name)
+        os.mkdir(export_path)
             
         # export the figure
         self.figure.savefig(os.path.join(export_path, 'regression.svg'))
