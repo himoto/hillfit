@@ -42,8 +42,8 @@ class HillFit(object):
     
     def regression(self, x_fit, y_fit, view_figure, x_label, y_label, title, *params):        
         corrected_y_data = self._equation(self.x_data, *params)
-        r_2 = r2_score(self.y_data, corrected_y_data)        
-        r_sqr = 'R\N{superscript two}: ' + f'{round(r_2, 6)}'
+        self.r_2 = r2_score(self.y_data, corrected_y_data)        
+        r_sqr = 'R\N{superscript two}: ' + f'{round(self.r_2, 6)}'
         
         pyplot.rcParams['figure.figsize'] = (11, 7)
         pyplot.rcParams['figure.dpi'] = 150
@@ -101,6 +101,6 @@ class HillFit(object):
         
         # export the fitted equation
         formatted_equation = re.sub('(\*\*)', '^', self.equation)
-        string = '\n'.join([f'Fitted Hill equation: {formatted_equation}', f'top = {self.top}', f'bottom = {self.bottom}', f'ec50 = {self.ec50}', f'nH = {self.nH}'])
+        string = '\n'.join([f'Fitted Hill equation: {formatted_equation}', 'R\N{superscript two}: ' + f'{round(self.r_2, 6)}', '', f'top = {self.top}', f'bottom = {self.bottom}', f'ec50 = {self.ec50}', f'nH = {self.nH}'])
         with open(os.path.join(export_path, 'equation.txt'), 'w') as output:
             output.writelines(string)
