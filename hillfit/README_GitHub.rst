@@ -7,7 +7,7 @@ Background
 
 The `Hill equation <https://www.physiologyweb.com/calculators/hill_equation_interactive_graph.html>`_ is defined as follows:
 
-y = bottom + ((top - bottom) * x\ :sup:`nH`\ ) / (EC50\ :sup:`nH`\ + x\ :sup:`nH`\)
+:math:`y = bottom + ((top - bottom) * x^nH ) / (EC50^nH + x^nH)`
 
 where *bottom* is the minimum activity; *top* is maximum activity; *EC50* is the half-maximum effective dose; and *nH* is the Hill coefficient. The variables *x* & *y* are the stimuli dose and the cellular or tissue response. The `hillfit` module that applies this biological equation is protected by the `MIT License <https://opensource.org/licenses/MIT>`_\.
 
@@ -73,5 +73,6 @@ Hillfit is executed through the following sequence of the aforementioned functio
  
  import hillfit
  model = hillfit.HillFit(x_data, y_data)
- model.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+ model.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', 
+               sigfigs = 6, view_figure = True)
  model.export(export_path = None, export_name = None)
