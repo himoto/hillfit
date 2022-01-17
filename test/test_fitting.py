@@ -1,4 +1,4 @@
-from numpy import ndarray
+from numpy import ndarray, float64
 from hillfit import HillFit
 from datetime import date
 from shutil import rmtree
@@ -44,7 +44,7 @@ def test_fitting():
     assert type(hf.x_fit) is ndarray
     assert type(hf.y_fit) is ndarray
     for quant in [hf.r_2, hf.top, hf.bottom, hf.ec50, hf.nH]:
-        assert type(quant) is float
+        assert type(quant) is (float or float64)
 
     for entry in list(hf.x_fit):
         index = list(hf.x_fit).index(entry)
