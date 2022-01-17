@@ -43,7 +43,7 @@ The parameterized data is fitted to the Hill equation, with the following argume
 
 .. code-block:: python
 
- fitted_xs, fitted_ys, fitted_equation = hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+ hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
@@ -84,5 +84,5 @@ Hillfit is executed through the following sequence of the aforementioned functio
  
  import hillfit
  hf = hillfit.HillFit(x_data, y_data)
- xs, ys, eq = hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+ hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
  hf.export(export_path = None, export_name = None)
