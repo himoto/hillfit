@@ -130,31 +130,30 @@ def test_init():
 
 def test_fitting():
     hf = HillFit(x_data, y_data)
-    x_fit, y_fit, eq = hf.fitting()
+    hf.fitting()
 
     # affirm module qualities
     x = 6
-    assert eval(eq)
-    assert isinstance(eq, str)
-    assert isinstance(x_fit, np.ndarray)
-    assert isinstance(y_fit, np.ndarray)
+    assert eval(hf.equation)
+    assert isinstance(hf.equation, str)
+    assert isinstance(hf.x_fit, np.ndarray)
+    assert isinstance(hf.y_fit, np.ndarray)
 
-    for entry in list(x_fit):
-        index = list(x_fit).index(entry)
+    for entry in list(hf.x_fit):
+        index = list(hf.x_fit).index(entry)
         assert round(entry, 3) == round(results_x[index], 3)
 
-    for entry in list(y_fit):
-        index = list(y_fit).index(entry)
+    for entry in list(hf.y_fit):
+        index = list(hf.y_fit).index(entry)
         assert round(entry, 3) == round(results_y[index], 3)
 
 
 def test_export():
     hf = HillFit(x_data, y_data)
-    x_fit, y_fit, eq = hf.fitting()
-    hf.export()
-
+    hf.fitting()
     # affirm module qualities
-    export_path = os.path.join(os.getcwd(), f"{date.today()}-Hillfit")
+    export_path = f"{date.today()}-Hillfit"
+    hf.export(export_path=export_path)
     for export_item in ["regression.svg", "equation.txt", "fitted_data.csv", "raw_data.csv"]:
         assert os.path.exists(os.path.join(export_path, export_item))
 
