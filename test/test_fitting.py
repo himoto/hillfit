@@ -42,7 +42,7 @@ def test_fitting():
     assert eval(eq)
     assert type(eq) is str
     
-    assert type(params) is list
+    assert type(params) is dict
     assert type(x_fit) is ndarray
     assert type(y_fit) is ndarray
 
