@@ -8,7 +8,7 @@ setup(
   name = 'Hillfit',      
   package_dir = {'fitting':'hillfit'},
   packages = find_packages(),
-  version = '0.1.1',
+  version = '0.1.2',
   license = 'MIT',
   description = "Model for fitting data with the Hill equation, and exporting the contents", 
   long_description = readme,

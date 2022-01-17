@@ -35,14 +35,12 @@ def test_init():
     
 def test_fitting():
     hf = HillFit(x_data, y_data)
-    x_fit, y_fit, params, eq = hf.fitting()
+    x_fit, y_fit, eq = hf.fitting()
     
     # affirm module qualities    
     x = 6
     assert eval(eq)
     assert type(eq) is str
-    
-    assert type(params) is dict
     assert type(x_fit) is ndarray
     assert type(y_fit) is ndarray
 
@@ -56,7 +54,7 @@ def test_fitting():
                 
 def test_export():
     hf = HillFit(x_data, y_data)
-    x_fit, y_fit, params, eq = hf.fitting()
+    x_fit, y_fit, eq = hf.fitting()
     hf.export()
     
     # affirm module qualities    

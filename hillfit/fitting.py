@@ -53,8 +53,7 @@ class HillFit(object):
         ax.set_xlabel(x_label)
         ax.set_ylabel(y_label)
         ax.set_title(title)
-        y_coord = 0.9*y_fit[-1]
-        ax.text(0.1, y_coord, r_sqr)
+        ax.text(x_fit[0], y_fit[-1], r_sqr)
         ax.legend(loc = 'lower right')
         
         if view_figure:
@@ -67,15 +66,6 @@ class HillFit(object):
         self.equation = f'{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})'
         
         self.regression(self.x_fit, self.y_fit, view_figure, x_label, y_label, title, *params)
-        
-        params_dict = {
-            "top": self.top,
-            "bottom": self.bottom,
-            "ec50": self.ec50,
-            "nH": self.nH,
-        }
-        
-        return self.x_fit, self.y_fit, params_dict, self.equation
     
     def export(self, export_directory = None, export_name = None):
         # define the unique export path
@@ -83,7 +73,7 @@ class HillFit(object):
             export_directory = os.getcwd()
             
         if export_name is None:
-            export_name = '-'.join([re.sub(' ', '_', str(x)) for x in [date.today(), 'Hillfit']])
+            export_name = '-'.join([re.sub(' ', '_', str(x)) for x in ['Hillfit', 'reg']])
             count = 0
             export_path = os.path.join(export_directory, export_name) 
             while os.path.exists(export_path):

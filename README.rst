@@ -43,20 +43,24 @@ The parameterized data is fitted to the Hill equation, with the following argume
 
 .. code-block:: python
 
- fitted_xs, fitted_ys, eq_params, fitted_equation = hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+ fitted_xs, fitted_ys, fitted_equation = hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
 - *sigfigs* ``int``: specifies the number of `significant figures <https://en.wikipedia.org/wiki/Significant_figures>`_ that will be used in printed instances of the fitted Hill equation.
 - *view_figure* ``bool``: specifies whether the regression plot will be printed in the Python environment.
 
---------------
-Returned
---------------
+----------------
+self-accessible
+----------------
+**Note**: Many data sets and exported components of the fitted information are accessible through the hillfit model object. 
 
-- *fitted_xs* & *fitted_ys* ``list``: The x- and y-values of the fitted Hill equation, respectively.
-- *eq_params* ``dict``: The fitted parameters of the Hill equation.
-- *fitted_equation* ``str``: The fitted Hill equation as a string, with the parameters substituted. The format of the string is amenable with the `eval() built-in Python function <https://pythongeeks.org/python-eval-function/>`_, which allows the user to directly execute the string as a function, as long as the `x` variable is defined as "x".
+- *top*, *bottom*, *ec50*, & *nH* ``float``: The fitted parameters of the Hill equation are accessible via ``hf.top``, ``hf.bottom``, ``hf.ec50``, & ``hf.nH``, respectively.
+- *fitted_xs* & *fitted_ys* ``list``: The x- and y-values of the fitted Hill equation are accessible via ``hf.x_fit`` & ``hf.y_fit``, respectively.
+- *fitted_equation* ``str``: The fitted Hill equation, in an amenable string format for the `eval() built-in Python function <https://pythongeeks.org/python-eval-function/>`_ that allows the user to directly execute the string as a function for an "x" variable, is accessible via ``hf.equation``.
+- *figure* ``matplotlib.figure``: The regression figure is available via ``hf.figure``.
+- *x_data* & *y_data* ``ndarray``: The arrays of original data are available via ``hf.x_data`` & ``hf.y_data``, respectively.
+
 
 ++++++++++
 export()
@@ -80,5 +84,5 @@ Hillfit is executed through the following sequence of the aforementioned functio
  
  import hillfit
  hf = hillfit.HillFit(x_data, y_data)
- xs, ys, params, eq = hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+ xs, ys, eq = hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
  hf.export(export_path = None, export_name = None)
