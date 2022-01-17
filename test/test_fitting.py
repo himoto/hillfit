@@ -35,30 +35,32 @@ def test_init():
     
 def test_fitting():
     hf = HillFit(x_data, y_data)
-    x_fit, y_fit, eq = hf.fitting()
+    hf.fitting()
     
     # affirm module qualities    
     x = 6
-    assert eval(eq)
-    assert type(eq) is str
-    assert type(x_fit) is ndarray
-    assert type(y_fit) is ndarray
+    assert eval(hf.equation)
+    assert type(hf.equation) is str
+    assert type(hf.x_fit) is ndarray
+    assert type(hf.y_fit) is ndarray
+    for quant in [hf.r_2, hf.top, hf.bottom, hf.ec50, hf.nH]:
+        assert type(quant) is float
 
-    for entry in list(x_fit):
-        index = list(x_fit).index(entry)
+    for entry in list(hf.x_fit):
+        index = list(hf.x_fit).index(entry)
         assert round(entry, 3) == round(results_x[index], 3)
         
-    for entry in list(y_fit):
-        index = list(y_fit).index(entry)
+    for entry in list(hf.y_fit):
+        index = list(hf.y_fit).index(entry)
         assert round(entry, 3) == round(results_y[index], 3)
                 
 def test_export():
     hf = HillFit(x_data, y_data)
-    x_fit, y_fit, eq = hf.fitting()
+    hf.fitting()
     hf.export()
     
     # affirm module qualities    
-    export_path = os.path.join(os.getcwd(), f'{date.today()}-Hillfit') 
+    export_path = os.path.join(os.getcwd(), f'Hillfit-reg') 
     for export_item in ['regression.svg', 'equation.txt', 'fitted_data.csv', 'raw_data.csv']:
         assert os.path.exists(os.path.join(export_path, export_item))
    
