@@ -72,7 +72,7 @@ The fitted Hill equation, with its data points and parameters, and the regressio
 
  hf.export(export_path = None, export_name = None)
 
-- *export_path* ``str``: optionally specifies a path to where the content will be exported, where `None` selects the current working directory.
+- *export_directory* ``str``: optionally specifies a path to where the content will be exported, where `None` selects the current working directory.
 - *export_name* ``str``: optionally specifies a name for the folder of exported content, where `None` enables the code to design a unique folder name for the information.
 
 Execution
@@ -85,4 +85,4 @@ Hillfit is executed through the following sequence of the aforementioned functio
  import hillfit
  hf = hillfit.HillFit(x_data, y_data)
  hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
- hf.export(export_path = None, export_name = None)
+ hf.export(export_directory = None, export_name = None)
