@@ -50,10 +50,10 @@ The parameterized data is fitted to the Hill equation, with the following argume
 - *sigfigs* ``int``: specifies the number of `significant figures <https://en.wikipedia.org/wiki/Significant_figures>`_ that will be used in printed instances of the fitted Hill equation.
 - *view_figure* ``bool``: specifies whether the regression plot will be printed in the Python environment.
 
-----------------
-self-accessible
-----------------
-Many data sets and exported components of the fitted information are accessible through the hillfit model object. 
+-----------------------------
+Accessible content
+-----------------------------
+Many data sets and exported components of the fitted information are accessible through the ``hillfit`` model object. 
 
 - *top*, *bottom*, *ec50*, & *nH* ``float``: The fitted parameters of the Hill equation are accessible via ``hf.top``, ``hf.bottom``, ``hf.ec50``, & ``hf.nH``, respectively.
 - *fitted_xs* & *fitted_ys* ``list``: The x- and y-values of the fitted Hill equation are accessible via ``hf.x_fit`` & ``hf.y_fit``, respectively.

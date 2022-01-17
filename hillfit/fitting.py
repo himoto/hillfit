@@ -53,7 +53,7 @@ class HillFit(object):
         ax.set_xlabel(x_label)
         ax.set_ylabel(y_label)
         ax.set_title(title)
-        ax.text(x_fit[0], y_fit[-1], r_sqr)
+        ax.text(0.7*x_fit[-1], 0.3*y_fit[-1], r_sqr)
         ax.legend(loc = 'lower right')
         
         if view_figure:
