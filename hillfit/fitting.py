@@ -67,7 +67,14 @@ class HillFit(object):
         
         self.regression(self.x_fit, self.y_fit, view_figure, x_label, y_label, title, *params)
         
-        return self.x_fit, self.y_fit, params, self.equation
+        params_dict = {
+            "top": self.top,
+            "bottom": self.bottom,
+            "ec50": self.ec50,
+            "nH": self.nH,
+        }
+        
+        return self.x_fit, self.y_fit, params_dict, self.equation
     
     def export(self, export_directory = None, export_name = None):
         # define the unique export path

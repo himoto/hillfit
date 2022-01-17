@@ -9,7 +9,7 @@ The `Hill equation <https://www.physiologyweb.com/calculators/hill_equation_inte
 
 y = bottom + ((top - bottom) * x\ :sup:`nH`\ ) / (EC50\ :sup:`nH`\ + x\ :sup:`nH`\)
 
-where *bottom* is the minimum activity; *top* is maximum activity; *EC50* is the half-maximum effective dose; and *nH* is the Hill coefficient. The variables *x* & *y* are the stimuli dose and the cellular or tissue response. The `hillfit` module that applies this biological equation is protected by the `MIT License <https://opensource.org/licenses/MIT>`_\.
+where *bottom* is the minimum activity; *top* is maximum activity; *EC50* is the half-maximum effective dose; and *nH* is the Hill coefficient. The variables *x* & *y* are the stimuli dose and the cellular or tissue response. The `hillfit` module applies this biological equation, and is protected by the `MIT License <https://opensource.org/licenses/MIT>`_\.
 
 Usage
 ++++++
@@ -43,7 +43,7 @@ The parameterized data is fitted to the Hill equation, with the following argume
 
 .. code-block:: python
 
-fitted_xs, fitted_ys, eq_params, fitted_equation = hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+ fitted_xs, fitted_ys, eq_params, fitted_equation = hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
@@ -55,7 +55,7 @@ Returned
 --------------
 
 - *fitted_xs* & *fitted_ys* ``list``: The x- and y-values of the fitted Hill equation, respectively.
-- *eq_params* ``list``: The fitted parameters of the Hill equation.
+- *eq_params* ``dict``: The fitted parameters of the Hill equation.
 - *fitted_equation* ``str``: The fitted Hill equation as a string, with the parameters substituted. The format of the string is amenable with the `eval() built-in Python function <https://pythongeeks.org/python-eval-function/>`_, which allows the user to directly execute the string as a function, as long as the `x` variable is defined as "x".
 
 ++++++++++
