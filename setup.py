@@ -36,9 +36,11 @@ def main():
             "data science",
             "Hill equation",
         ],
-        install_requires=[l.strip() for l in Path("requirements.txt").read_text("utf-8").splitlines()],
+        install_requires=[
+            l.strip() for l in Path("requirements.txt").read_text("utf-8").splitlines()
+        ],
     )
 
 
-if __name__ =="__main__":
+if __name__ == "__main__":
     main()
