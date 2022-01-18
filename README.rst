@@ -1,5 +1,27 @@
 Fitting the Hill Equation to Experimental Data
---------------------------------------------------
+----------------------------------------------
+
+|Actions Status| |License| |Pre commit| |Code style| |Imports|
+
+.. |Actions Status| image:: https://github.com/himoto/hillfit/workflows/Tests/badge.svg
+   :target: https://github.com/himoto/hillfit/actions
+   :alt: Actions Status
+
+.. |License| image:: https://img.shields.io/badge/License-MIT-green.svg
+   :target: https://opensource.org/licenses/MIT
+   :alt: License
+
+.. |Pre commit| image:: https://results.pre-commit.ci/badge/github/himoto/hillfit/master.svg
+   :target: https://results.pre-commit.ci/latest/github/himoto/hillfit/master
+   :alt: pre-commit.ci status
+
+.. |Code style| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/psf/black
+   :alt: Code style: black
+
+.. |Imports| image:: https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336
+   :target: https://pycqa.github.io/isort/
+   :alt: Imports: isort
 
 Background
 +++++++++++
