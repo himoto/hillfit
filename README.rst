@@ -1,7 +1,11 @@
 Fitting the Hill Equation to Experimental Data
 ----------------------------------------------
 
-|Actions Status| |License| |Pre commit| |Code style| |Imports|
+|PyPI version| |Actions Status| |License| |Pre commit| |Code style| |Imports|
+
+.. |PyPI version| image:: https://img.shields.io/pypi/v/hillfit.svg?logo=PyPI&logoColor=white
+   :target: https://pypi.python.org/pypi/hillfit/
+   :alt: PyPI version
 
 .. |Actions Status| image:: https://github.com/himoto/hillfit/workflows/Tests/badge.svg
    :target: https://github.com/himoto/hillfit/actions
