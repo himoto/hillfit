@@ -27,8 +27,8 @@ def main():
         license="MIT",
         description="Model for fitting data with the Hill equation, and exporting the contents",
         long_description=readme,
-        author=",".join(["Andrew Freiburger", "Hiroaki Imoto"]),
-        author_email=",".join(["andrewfreiburger@gmail.com", "himoto@protein.osaka-u.ac.jp"]),
+        author=", ".join(["Andrew Freiburger", "Hiroaki Imoto"]),
+        author_email=", ".join(["andrewfreiburger@gmail.com", "himoto@protein.osaka-u.ac.jp"]),
         url="https://github.com/himoto/hillfit",
         keywords=[
             "biochemistry",
