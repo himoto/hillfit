@@ -4,15 +4,10 @@ from pathlib import Path
 
 from setuptools import find_packages, setup
 
-
-def get_version() -> str:
-
-    version_filepath = os.path.join(os.path.dirname(__file__), "hillfit", "version.py")
-    with open(version_filepath) as f:
-        for line in f:
-            if line.startswith("__version__"):
-                return line.strip().split()[-1][1:-1]
-    assert False
+try:
+    from hillfit import __version__
+except ImportError:
+    __version__ = "0.1.1"
 
 
 def main():
@@ -23,7 +18,7 @@ def main():
         name="hillfit",
         package_dir={"fitting": "hillfit"},
         packages=find_packages(),
-        version=get_version(),
+        version=__version__,
         license="MIT",
         description="Model for fitting data with the Hill equation, and exporting the contents",
         long_description=readme,
