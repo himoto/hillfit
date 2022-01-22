@@ -48,10 +48,10 @@ class HillFit(object):
         )
         return [float(param) for param in popt]
 
-    def regression(self, x_fit, y_fit, view_figure, x_label, y_label, title, *params) -> None:
+    def regression(self, x_fit, y_fit, view_figure, x_label, y_label, title, sigfigs, *params) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
-        r_sqr = "R\N{superscript two}: " + f"{round(self.r_2, 6)}"
+        r_sqr = "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}"
 
         plt.rcParams["figure.figsize"] = (11, 7)
         plt.rcParams["figure.dpi"] = 150
@@ -67,6 +67,7 @@ class HillFit(object):
         x_coordinate = 0.8 * x_fit[-1]
         if x_coordinate < x_fit[0]:
             x_coordinate = 2 * x_fit[0]
+        ax.text(x_coordinate, y_coordinate, r_sqr)
         ax.legend(loc="lower right")
 
         if view_figure:
@@ -87,7 +88,7 @@ class HillFit(object):
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
-        self.regression(self.x_fit, self.y_fit, view_figure, x_label, y_label, title, *params)
+        self.regression(self.x_fit, self.y_fit, view_figure, x_label, y_label, title, sigfigs, *params)
 
     def export(
         self, export_directory: Optional[str] = None, export_name: Optional[str] = None
@@ -127,7 +128,7 @@ class HillFit(object):
         formatted_equation = re.sub("(\*\*)", "^", self.equation)
         string = "\n".join(
             [
-                f"Fitted Hill equation (R\N{superscript two} of {round(self.r_2, 4)}): {formatted_equation}",
+                f"Fitted Hill equation (R\N{superscript two} of {round(self.r_2, 6)}): {formatted_equation}",
                 f"top = {self.top}",
                 f"bottom = {self.bottom}",
                 f"ec50 = {self.ec50}",
