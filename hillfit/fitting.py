@@ -31,14 +31,14 @@ class HillFit(object):
     def _get_param(self) -> List[float]:
         min_data = np.amin(self.y_data)
         max_data = np.amax(self.y_data)
-        
+
         h = abs(max_data - min_data)
         param_initial = [max_data, min_data, 0.5 * (self.x_data[-1] - self.x_data[0]), 1]
         param_bounds = (
             [max_data - 0.5 * h, min_data - 0.5 * h, self.x_data[0] * 0.1, 0.01],
             [max_data + 0.5 * h, min_data + 0.5 * h, self.x_data[-1] * 10, 100],
         )
-        
+
         popt, _ = curve_fit(
             self._equation,
             self.x_data,
@@ -61,12 +61,12 @@ class HillFit(object):
         ax.set_xlabel(x_label)
         ax.set_ylabel(y_label)
         ax.set_title(title)
-        y_coordinate = 0.7*y_fit[-1]
+        y_coordinate = 0.7 * y_fit[-1]
         if y_coordinate < y_fit[0]:
-            y_coordinate = 1*y_fit[0]
-        x_coordinate = 0.8*x_fit[-1]
+            y_coordinate = 1 * y_fit[0]
+        x_coordinate = 0.8 * x_fit[-1]
         if x_coordinate < x_fit[0]:
-            x_coordinate = 2*x_fit[0]
+            x_coordinate = 2 * x_fit[0]
         ax.legend(loc="lower right")
 
         if view_figure:

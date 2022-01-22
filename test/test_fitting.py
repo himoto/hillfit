@@ -4,6 +4,7 @@ from shutil import rmtree
 
 import numpy as np
 from sigfig import round
+
 from hillfit import HillFit
 
 # define test data
