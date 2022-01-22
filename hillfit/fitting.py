@@ -50,8 +50,8 @@ class HillFit(object):
 
     def regression(self, x_fit, y_fit, view_figure, x_label, y_label, title, *params) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
-        r_2 = r2_score(self.y_data, corrected_y_data)
-        r_sqr = "R\N{superscript two}: " + f"{round(r_2, 6)}"
+        self.r_2 = r2_score(self.y_data, corrected_y_data)
+        r_sqr = "R\N{superscript two}: " + f"{round(self.r_2, 6)}"
 
         plt.rcParams["figure.figsize"] = (11, 7)
         plt.rcParams["figure.dpi"] = 150
