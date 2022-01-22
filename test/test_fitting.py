@@ -139,7 +139,7 @@ def test_fitting():
     assert isinstance(hf.x_fit, np.ndarray)
     assert isinstance(hf.y_fit, np.ndarray)
 
-    assert type(hf.r_2) is float64
+    assert type(hf.r_2) is np.float64
     for quant in [hf.top, hf.bottom, hf.ec50, hf.nH]:
         assert type(quant) is float
 
