@@ -9,7 +9,7 @@ The `Hill equation <https://www.physiologyweb.com/calculators/hill_equation_inte
 
 y = bottom + ((top - bottom) * x\ :sup:`nH`\ ) / (EC50\ :sup:`nH`\ + x\ :sup:`nH`\)
 
-where *bottom* is the minimum activity; *top* is maximum activity; *EC50* is the half-maximum effective dose; and *nH* is the Hill coefficient. The variables *x* & *y* are the stimuli dose and the cellular or tissue response. The `hillfit` module applies this biological equation, and is protected by the `MIT License <https://opensource.org/licenses/MIT>`_\.
+where *bottom* is the minimum activity; *top* is maximum activity; *EC50* is the half-maximum effective dose; and *nH* is the Hill coefficient. The variables *x* & *y* are the stimuli dose and the cellular or tissue response. The `hillfit` module applies this biological equation, and is available with the `MIT License <https://opensource.org/licenses/MIT>`_\.
 
 Usage
 ++++++
