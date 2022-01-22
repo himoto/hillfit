@@ -1,5 +1,5 @@
-Fitting the Hill Equation to Experimental Data
-----------------------------------------------
+Fitting the Hill Equation to Modeled or Experimental Data
+----------------------------------------------------------------------------
 
 |PyPI version| |Actions Status| |License| |Downloads| |Pre commit| |Code style| |Imports|
 
