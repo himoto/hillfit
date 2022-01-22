@@ -127,7 +127,7 @@ class HillFit(object):
         formatted_equation = re.sub("(\*\*)", "^", self.equation)
         string = "\n".join(
             [
-                f"Fitted Hill equation: {formatted_equation}",
+                f"Fitted Hill equation (R\N{superscript two} of {round(self.r_2, 4)}): {formatted_equation}",
                 f"top = {self.top}",
                 f"bottom = {self.bottom}",
                 f"ec50 = {self.ec50}",
