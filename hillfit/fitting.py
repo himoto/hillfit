@@ -31,6 +31,7 @@ class HillFit(object):
     def _get_param(self) -> List[float]:
         min_data = np.amin(self.y_data)
         max_data = np.amax(self.y_data)
+
         h = abs(max_data - min_data)
         param_initial = [max_data, min_data, 0.5 * (self.x_data[-1] - self.x_data[0]), 1]
         param_bounds = (
@@ -49,8 +50,8 @@ class HillFit(object):
 
     def regression(self, x_fit, y_fit, view_figure, x_label, y_label, title, *params) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
-        r_2 = r2_score(self.y_data, corrected_y_data)
-        r_sqr = "R\N{superscript two}: " + f"{round(r_2, 6)}"
+        self.r_2 = r2_score(self.y_data, corrected_y_data)
+        r_sqr = "R\N{superscript two}: " + f"{round(self.r_2, 6)}"
 
         plt.rcParams["figure.figsize"] = (11, 7)
         plt.rcParams["figure.dpi"] = 150
@@ -60,7 +61,12 @@ class HillFit(object):
         ax.set_xlabel(x_label)
         ax.set_ylabel(y_label)
         ax.set_title(title)
-        ax.text(0.7 * x_fit[-1], 0.3 * y_fit[-1], r_sqr)
+        y_coordinate = 0.7 * y_fit[-1]
+        if y_coordinate < y_fit[0]:
+            y_coordinate = 1 * y_fit[0]
+        x_coordinate = 0.8 * x_fit[-1]
+        if x_coordinate < x_fit[0]:
+            x_coordinate = 2 * x_fit[0]
         ax.legend(loc="lower right")
 
         if view_figure:
@@ -121,7 +127,7 @@ class HillFit(object):
         formatted_equation = re.sub("(\*\*)", "^", self.equation)
         string = "\n".join(
             [
-                f"Fitted Hill equation: {formatted_equation}",
+                f"Fitted Hill equation (R\N{superscript two} of {round(self.r_2, 4)}): {formatted_equation}",
                 f"top = {self.top}",
                 f"bottom = {self.bottom}",
                 f"ec50 = {self.ec50}",
