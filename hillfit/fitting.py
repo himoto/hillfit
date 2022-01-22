@@ -49,11 +49,11 @@ class HillFit(object):
         return [float(param) for param in popt]
 
     def regression(
-        self, x_fit, y_fit, view_figure, x_label, y_label, title, sigfigs, *params
+        self, x_fit, y_fit, view_figure, x_label, y_label, title, *params
     ) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
-        # r_sqr = "R\N{superscript two}: " + f"{round(self.r_2, 6)}"
+        # r_sqr = "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}"
 
         plt.rcParams["figure.figsize"] = (11, 7)
         plt.rcParams["figure.dpi"] = 150
@@ -90,7 +90,7 @@ class HillFit(object):
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
         self.regression(
-            self.x_fit, self.y_fit, view_figure, x_label, y_label, title, sigfigs, *params
+            self.x_fit, self.y_fit, view_figure, x_label, y_label, title, *params
         )
 
     def export(
