@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
 from pathlib import Path
 
 from setuptools import find_packages, setup
