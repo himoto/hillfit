@@ -139,6 +139,10 @@ def test_fitting():
     assert isinstance(hf.x_fit, np.ndarray)
     assert isinstance(hf.y_fit, np.ndarray)
 
+    assert type(hf.r_2) is np.float64
+    for quant in [hf.top, hf.bottom, hf.ec50, hf.nH]:
+        assert type(quant) is float
+
     for entry in list(hf.x_fit):
         index = list(hf.x_fit).index(entry)
         assert round(entry, 3) == round(results_x[index], 3)

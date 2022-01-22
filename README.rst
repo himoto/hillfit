@@ -31,6 +31,7 @@ Fitting the Hill Equation to Experimental Data
    :target: https://pycqa.github.io/isort/
    :alt: Imports: isort
 
+
 Background
 +++++++++++
 
@@ -39,7 +40,7 @@ The `Hill equation <https://www.physiologyweb.com/calculators/hill_equation_inte
 
 y = bottom + ((top - bottom) * x\ :sup:`nH`\ ) / (EC50\ :sup:`nH`\ + x\ :sup:`nH`\)
 
-where *bottom* is the minimum activity; *top* is maximum activity; *EC50* is the half-maximum effective dose; and *nH* is the Hill coefficient. The variables *x* & *y* are the stimuli dose and the cellular or tissue response. The `hillfit` module applies this biological equation, and is protected by the `MIT License <https://opensource.org/licenses/MIT>`_\.
+where *bottom* is the minimum activity; *top* is maximum activity; *EC50* is the half-maximum effective dose; and *nH* is the Hill coefficient. The variables *x* & *y* are the stimuli dose and the cellular or tissue response. The `hillfit` module applies this biological equation, and is available with the `MIT License <https://opensource.org/licenses/MIT>`_\.
 
 Usage
 ++++++
@@ -50,7 +51,7 @@ installation
 
 The following command are executed in a command prompt/terminal environment::
 
-   pip install hillfit
+ pip install hillfit
 
 +++++++++++
 __init__
@@ -60,8 +61,8 @@ The data environment, in a `Python IDE <https://www.simplilearn.com/tutorials/py
 
 .. code-block:: python
 
-   import hillfit
-   hf = hillfit.HillFit(x_data, y_data)
+ import hillfit
+ hf = hillfit.HillFit(x_data, y_data)
 
 - *x_data* & *y_data* ``list`` or ``ndarray``: specifies the x-values & y-values, respectively, of the raw data that will be fitted with the Hill equation.
 
@@ -73,7 +74,8 @@ The parameterized data is fitted to the Hill equation, with the following argume
 
 .. code-block:: python
 
-   hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+ hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
