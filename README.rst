@@ -1,5 +1,36 @@
-Fitting data to the Hill equation
---------------------------------------------------
+Fitting the Hill Equation to Experimental Data
+----------------------------------------------
+
+|PyPI version| |Actions Status| |License| |Downloads| |Pre commit| |Code style| |Imports|
+
+.. |PyPI version| image:: https://img.shields.io/pypi/v/hillfit.svg?logo=PyPI&logoColor=white
+   :target: https://pypi.python.org/pypi/hillfit/
+   :alt: PyPI version
+
+.. |Actions Status| image:: https://github.com/himoto/hillfit/workflows/Tests/badge.svg
+   :target: https://github.com/himoto/hillfit/actions
+   :alt: Actions Status
+
+.. |License| image:: https://img.shields.io/badge/License-MIT-blue.svg
+   :target: https://opensource.org/licenses/MIT
+   :alt: License
+
+.. |Downloads| image:: https://pepy.tech/badge/hillfit
+   :target: https://pepy.tech/project/hillfit
+   :alt: Downloads
+
+.. |Pre commit| image:: https://results.pre-commit.ci/badge/github/himoto/hillfit/master.svg
+   :target: https://results.pre-commit.ci/latest/github/himoto/hillfit/master
+   :alt: pre-commit.ci status
+
+.. |Code style| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/psf/black
+   :alt: Code style: black
+
+.. |Imports| image:: https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336
+   :target: https://pycqa.github.io/isort/
+   :alt: Imports: isort
+
 
 Background
 +++++++++++
@@ -19,7 +50,7 @@ installation
 +++++++++++++
 
 The following command are executed in a command prompt/terminal environment::
- 
+
  pip install hillfit
 
 +++++++++++
@@ -44,6 +75,7 @@ The parameterized data is fitted to the Hill equation, with the following argume
 .. code-block:: python
 
  hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
@@ -70,9 +102,9 @@ The fitted Hill equation, with its data points and parameters, and the regressio
 
 .. code-block:: python
 
- hf.export(export_path = None, export_name = None)
+   hf.export(export_directory = None, export_name = None)
 
-- *export_path* ``str``: optionally specifies a path to where the content will be exported, where `None` selects the current working directory.
+- *export_directory* ``str``: optionally specifies a path to where the content will be exported, where `None` selects the current working directory.
 - *export_name* ``str``: optionally specifies a name for the folder of exported content, where `None` enables the code to design a unique folder name for the information.
 
 Execution
@@ -81,8 +113,8 @@ Execution
 Hillfit is executed through the following sequence of the aforementioned functions, which is exemplified in the `example Notebook of our GitHub repository <https://github.com/freiburgermsu/hillfit/tree/master/examples>`_:
 
 .. code-block:: python
- 
- import hillfit
- hf = hillfit.HillFit(x_data, y_data)
- hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
- hf.export(export_path = None, export_name = None)
+
+   import hillfit
+   hf = hillfit.HillFit(x_data, y_data)
+   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+   hf.export(export_directory = None, export_name = None)
