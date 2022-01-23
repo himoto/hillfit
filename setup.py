@@ -3,7 +3,7 @@ from pathlib import Path
 
 from setuptools import find_packages, setup
 
-import hillfit
+from hillfit import __version__
 
 
 def main():
@@ -14,7 +14,7 @@ def main():
         name="hillfit",
         package_dir={"fitting": "hillfit"},
         packages=find_packages(),
-        version=hillfit.__version__,
+        version=__version__,
         license="MIT",
         description="Model for fitting data with the Hill equation, and exporting the contents",
         long_description=readme,
