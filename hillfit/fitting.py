@@ -48,7 +48,9 @@ class HillFit(object):
         )
         return [float(param) for param in popt]
 
-    def regression(self, x_fit, y_fit, x_label, y_label, title, sigfigs, print_r_sqr, view_figure, *params) -> None:
+    def regression(
+        self, x_fit, y_fit, x_label, y_label, title, sigfigs, print_r_sqr, view_figure, *params
+    ) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
 
@@ -70,8 +72,12 @@ class HillFit(object):
             x_coordinate = 0.8 * x_fit[-1]
             if x_coordinate < x_fit[0]:
                 x_coordinate = 2 * x_fit[0]
-                
-            self.ax.text(x_coordinate, y_coordinate, "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}")
+
+            self.ax.text(
+                x_coordinate,
+                y_coordinate,
+                "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}",
+            )
 
         if view_figure:
             self.figure.show()
@@ -92,7 +98,17 @@ class HillFit(object):
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
-        self.regression(self.x_fit, self.y_fit, x_label, y_label, title, sigfigs, print_r_sqr, view_figure, *params)
+        self.regression(
+            self.x_fit,
+            self.y_fit,
+            x_label,
+            y_label,
+            title,
+            sigfigs,
+            print_r_sqr,
+            view_figure,
+            *params,
+        )
 
     def export(
         self, export_directory: Optional[str] = None, export_name: Optional[str] = None
