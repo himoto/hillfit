@@ -48,27 +48,30 @@ class HillFit(object):
         )
         return [float(param) for param in popt]
 
-    def regression(self, x_fit, y_fit, view_figure, x_label, y_label, title, sigfigs, *params) -> None:
+    def regression(self, x_fit, y_fit, x_label, y_label, title, sigfigs, print_r_sqr, view_figure, *params) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
-        r_sqr = "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}"
 
+        # define the regression plot
         plt.rcParams["figure.figsize"] = (11, 7)
         plt.rcParams["figure.dpi"] = 150
-        self.figure, ax = plt.subplots()
-        ax.plot(x_fit, y_fit, label="Hill fit")
-        ax.scatter(self.x_data, self.y_data, label="raw_data")
-        ax.set_xlabel(x_label)
-        ax.set_ylabel(y_label)
-        ax.set_title(title)
-        y_coordinate = 0.7 * y_fit[-1]
-        if y_coordinate < y_fit[0]:
-            y_coordinate = 1 * y_fit[0]
-        x_coordinate = 0.8 * x_fit[-1]
-        if x_coordinate < x_fit[0]:
-            x_coordinate = 2 * x_fit[0]
-        ax.text(x_coordinate, y_coordinate, r_sqr)
-        ax.legend(loc="lower right")
+        self.figure, self.ax = plt.subplots()
+        self.ax.plot(x_fit, y_fit, label="Hill fit")
+        self.ax.scatter(self.x_data, self.y_data, label="raw_data")
+        self.ax.set_xlabel(x_label)
+        self.ax.set_ylabel(y_label)
+        self.ax.set_title(title)
+        self.ax.legend(loc="lower right")
+        if print_r_sqr:
+            # define the coordinates location of the printed R^2 on the figure
+            y_coordinate = 0.7 * y_fit[-1]
+            if y_coordinate < y_fit[0]:
+                y_coordinate = 1 * y_fit[0]
+            x_coordinate = 0.8 * x_fit[-1]
+            if x_coordinate < x_fit[0]:
+                x_coordinate = 2 * x_fit[0]
+                
+            self.ax.text(x_coordinate, y_coordinate, "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}")
 
         if view_figure:
             self.figure.show()
@@ -79,6 +82,7 @@ class HillFit(object):
         y_label: str = "y",
         title: str = "Fitted Hill equation",
         sigfigs: int = 6,
+        print_r_sqr: bool = True,
         view_figure: bool = True,
     ):
         self.x_fit = np.logspace(
@@ -88,7 +92,7 @@ class HillFit(object):
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
-        self.regression(self.x_fit, self.y_fit, view_figure, x_label, y_label, title, sigfigs, *params)
+        self.regression(self.x_fit, self.y_fit, x_label, y_label, title, sigfigs, print_r_sqr, view_figure, *params)
 
     def export(
         self, export_directory: Optional[str] = None, export_name: Optional[str] = None
