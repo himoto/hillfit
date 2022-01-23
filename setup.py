@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 
 def get_version() -> str:
 
-    version_filepath = os.path.join(os.path.dirname(__file__), "hillfit", "version.py")
+    version_filepath = os.path.join(os.path.dirname(__file__), "hillfit", "__init__.py")
     with open(version_filepath) as f:
         for line in f:
             if line.startswith("__version__"):
