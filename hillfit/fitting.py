@@ -63,13 +63,13 @@ class HillFit(object):
         ax.set_xlabel(x_label)
         ax.set_ylabel(y_label)
         ax.set_title(title)
-#         y_coordinate = 0.7 * y_fit[-1]
-#         if y_coordinate < y_fit[0]:
-#             y_coordinate = 1 * y_fit[0]
-#         x_coordinate = 0.8 * x_fit[-1]
-#         if x_coordinate < x_fit[0]:
-#             x_coordinate = 2 * x_fit[0]
-#         ax.text(x_coordinate, y_coordinate, r_sqr)
+        #         y_coordinate = 0.7 * y_fit[-1]
+        #         if y_coordinate < y_fit[0]:
+        #             y_coordinate = 1 * y_fit[0]
+        #         x_coordinate = 0.8 * x_fit[-1]
+        #         if x_coordinate < x_fit[0]:
+        #             x_coordinate = 2 * x_fit[0]
+        #         ax.text(x_coordinate, y_coordinate, r_sqr)
         ax.legend(loc="lower right")
 
         if view_figure:
