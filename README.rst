@@ -89,11 +89,10 @@ Accessible content
 Many data sets and exported components of the fitted information are accessible through the ``hillfit`` model object. 
 
 - *top*, *bottom*, *ec50*, & *nH* ``float``: The fitted parameters of the Hill equation are accessible via ``hf.top``, ``hf.bottom``, ``hf.ec50``, & ``hf.nH``, respectively.
-- *R\ :sup:`2`\* ``float``: The coefficient of determination of the regression figure is available via ``hf.r_2``.
+- *R\ :sup:`2`\ * ``float``: The coefficient of determination of the regression figure is available via ``hf.r_2``.
 - *fitted_xs* & *fitted_ys* ``list``: The x- and y-values of the fitted Hill equation are accessible via ``hf.x_fit`` & ``hf.y_fit``, respectively.
 - *fitted_equation* ``str``: The fitted Hill equation, in an amenable string format for the `eval() built-in Python function <https://pythongeeks.org/python-eval-function/>`_ that allows the user to directly execute the string as a function for an "x" variable, is accessible via ``hf.equation``.
 - *figure* & *ax* ``matplotlib.figure``: The `fig` and `ax` objects of the regression figure are available via ``hf.figure`` & ``hf.ax``, respectively. This allows users to edit the figures after the simulation is conducted.
-- *R^2* ``float``: The coefficient of determination of the regression figure is available via ``hf.r_2``.
 - *x_data* & *y_data* ``ndarray``: The arrays of original data are available via ``hf.x_data`` & ``hf.y_data``, respectively.
 
 
