@@ -51,7 +51,7 @@ class HillFit(object):
     def regression(self, x_fit, y_fit, view_figure, x_label, y_label, title, sigfigs, *params) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
-        r_sqr = "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}"
+        # r_sqr = "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}"
 
         plt.rcParams["figure.figsize"] = (11, 7)
         plt.rcParams["figure.dpi"] = 150
@@ -61,13 +61,13 @@ class HillFit(object):
         ax.set_xlabel(x_label)
         ax.set_ylabel(y_label)
         ax.set_title(title)
-        y_coordinate = 0.7 * y_fit[-1]
-        if y_coordinate < y_fit[0]:
-            y_coordinate = 1 * y_fit[0]
-        x_coordinate = 0.8 * x_fit[-1]
-        if x_coordinate < x_fit[0]:
-            x_coordinate = 2 * x_fit[0]
-        ax.text(x_coordinate, y_coordinate, r_sqr)
+#         y_coordinate = 0.7 * y_fit[-1]
+#         if y_coordinate < y_fit[0]:
+#             y_coordinate = 1 * y_fit[0]
+#         x_coordinate = 0.8 * x_fit[-1]
+#         if x_coordinate < x_fit[0]:
+#             x_coordinate = 2 * x_fit[0]
+#         ax.text(x_coordinate, y_coordinate, r_sqr)
         ax.legend(loc="lower right")
 
         if view_figure:
