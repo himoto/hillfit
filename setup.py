@@ -1,9 +1,18 @@
 # -*- coding: utf-8 -*-
+import os
 from pathlib import Path
 
 from setuptools import find_packages, setup
 
-from hillfit import __version__
+
+def get_version() -> str:
+
+    version_filepath = os.path.join(os.path.dirname(__file__), "hillfit", "__init__.py")
+    with open(version_filepath) as f:
+        for line in f:
+            if line.startswith("__version__"):
+                return line.strip().split()[-1][1:-1]
+    assert False
 
 
 def main():
@@ -14,7 +23,7 @@ def main():
         name="hillfit",
         package_dir={"fitting": "hillfit"},
         packages=find_packages(),
-        version=__version__,
+        version=get_version(),
         license="MIT",
         description="Model for fitting data with the Hill equation, and exporting the contents",
         long_description=readme,
