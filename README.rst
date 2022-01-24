@@ -80,9 +80,10 @@ The parameterized data is fitted to the Hill equation, with the following argume
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
 - *sigfigs* ``int``: specifies the number of `significant figures <https://en.wikipedia.org/wiki/Significant_figures>`_ that will be used in printed instances of the fitted Hill equation.
-- *view_figure* ``bool``: specifies whether the regression plot will be printed in the Python environment.
-- *print_r_sqr* ``bool``: specifies whether the coefficient of determination (R\ :sup:`2`\) regression plot will be printed in the Python environment.
 - *log_y* ``bool``: specifies whether the y-axis of the regression plot will be converted into a logarithmic scale.
+- *print_r_sqr* ``bool``: specifies whether the coefficient of determination (R\ :sup:`2`\) regression plot will be printed in the Python environment.
+- *view_figure* ``bool``: specifies whether the regression plot will be printed in the Python environment.
+
 
 -----------------------------
 Accessible content
