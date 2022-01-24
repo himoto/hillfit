@@ -49,7 +49,17 @@ class HillFit(object):
         return [float(param) for param in popt]
 
     def regression(
-        self, x_fit, y_fit, x_label, y_label, title, sigfigs, log_y, print_r_sqr, view_figure, *params
+        self,
+        x_fit,
+        y_fit,
+        x_label,
+        y_label,
+        title,
+        sigfigs,
+        log_y,
+        print_r_sqr,
+        view_figure,
+        *params,
     ) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
@@ -59,8 +69,8 @@ class HillFit(object):
         plt.rcParams["figure.dpi"] = 150
         self.figure, self.ax = plt.subplots()
         if log_y:
-            y_fit = -np.log10(1-y_fit)
-            self.y_data = -np.log10(1-self.y_data)
+            y_fit = -np.log10(1 - y_fit)
+            self.y_data = -np.log10(1 - self.y_data)
             print_r_sqr = False
         self.ax.plot(x_fit, y_fit, label="Hill fit")
         self.ax.scatter(self.x_data, self.y_data, label="raw_data")
@@ -77,7 +87,11 @@ class HillFit(object):
             if x_coordinate < x_fit[0]:
                 x_coordinate = 2 * x_fit[0]
 
-            self.ax.text(x_coordinate, y_coordinate, "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}",)
+            self.ax.text(
+                x_coordinate,
+                y_coordinate,
+                "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}",
+            )
 
         if view_figure:
             self.figure.show()
@@ -92,12 +106,25 @@ class HillFit(object):
         print_r_sqr: bool = True,
         view_figure: bool = True,
     ):
-        self.x_fit = np.logspace(np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data))
+        self.x_fit = np.logspace(
+            np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data)
+        )
         params = self._get_param()
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
-        self.regression(self.x_fit, self.y_fit, x_label, y_label, title, sigfigs, log_y, print_r_sqr, view_figure, *params)
+        self.regression(
+            self.x_fit,
+            self.y_fit,
+            x_label,
+            y_label,
+            title,
+            sigfigs,
+            log_y,
+            print_r_sqr,
+            view_figure,
+            *params,
+        )
 
     def export(
         self, export_directory: Optional[str] = None, export_name: Optional[str] = None
