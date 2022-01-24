@@ -74,7 +74,7 @@ The parameterized data is fitted to the Hill equation, with the following argume
 
 .. code-block:: python
 
- hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, print_r_sqr = True, view_figure = True)
+ hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, log_y = False, print_r_sqr = True, view_figure = True)
 
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
@@ -82,6 +82,7 @@ The parameterized data is fitted to the Hill equation, with the following argume
 - *sigfigs* ``int``: specifies the number of `significant figures <https://en.wikipedia.org/wiki/Significant_figures>`_ that will be used in printed instances of the fitted Hill equation.
 - *view_figure* ``bool``: specifies whether the regression plot will be printed in the Python environment.
 - *print_r_sqr* ``bool``: specifies whether the coefficient of determination (R\ :sup:`2`\) regression plot will be printed in the Python environment.
+- *log_y* ``bool``: specifies whether the y-axis of the regression plot will be converted into a logarithmic scale.
 
 -----------------------------
 Accessible content
@@ -118,5 +119,5 @@ Hillfit is executed through the following sequence of the aforementioned functio
 
    import hillfit
    hf = hillfit.HillFit(x_data, y_data)
-   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True, , print_r_sqr = True)
+   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, log_y = False, view_figure = True, , print_r_sqr = True)
    hf.export(export_directory = None, export_name = None)
