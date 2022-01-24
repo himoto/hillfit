@@ -74,13 +74,15 @@ The parameterized data is fitted to the Hill equation, with the following argume
 
 .. code-block:: python
 
- hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+ hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, log_y = False, print_r_sqr = True, view_figure = True)
 
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
 - *sigfigs* ``int``: specifies the number of `significant figures <https://en.wikipedia.org/wiki/Significant_figures>`_ that will be used in printed instances of the fitted Hill equation.
 - *view_figure* ``bool``: specifies whether the regression plot will be printed in the Python environment.
+- *print_r_sqr* ``bool``: specifies whether the coefficient of determination (R\ :sup:`2`\) regression plot will be printed in the Python environment.
+- *log_y* ``bool``: specifies whether the y-axis of the regression plot will be converted into a logarithmic scale.
 
 -----------------------------
 Accessible content
@@ -88,10 +90,10 @@ Accessible content
 Many data sets and exported components of the fitted information are accessible through the ``hillfit`` model object. 
 
 - *top*, *bottom*, *ec50*, & *nH* ``float``: The fitted parameters of the Hill equation are accessible via ``hf.top``, ``hf.bottom``, ``hf.ec50``, & ``hf.nH``, respectively.
+- *R*\ :sup:`2`\ ``float``: The coefficient of determination of the regression figure is available via ``hf.r_2``.
 - *fitted_xs* & *fitted_ys* ``list``: The x- and y-values of the fitted Hill equation are accessible via ``hf.x_fit`` & ``hf.y_fit``, respectively.
 - *fitted_equation* ``str``: The fitted Hill equation, in an amenable string format for the `eval() built-in Python function <https://pythongeeks.org/python-eval-function/>`_ that allows the user to directly execute the string as a function for an "x" variable, is accessible via ``hf.equation``.
-- *figure* ``matplotlib.figure``: The regression figure is available via ``hf.figure``.
-- *R^2* ``float``: The coefficient of determination of the regression figure is available via ``hf.r_2``.
+- *figure* & *ax* ``matplotlib.figure``: The `fig` and `ax` objects of the regression figure are available via ``hf.figure`` & ``hf.ax``, respectively. This allows users to edit the figures after the simulation is conducted.
 - *x_data* & *y_data* ``ndarray``: The arrays of original data are available via ``hf.x_data`` & ``hf.y_data``, respectively.
 
 
@@ -117,5 +119,5 @@ Hillfit is executed through the following sequence of the aforementioned functio
 
    import hillfit
    hf = hillfit.HillFit(x_data, y_data)
-   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, view_figure = True)
+   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, log_y = False, view_figure = True, , print_r_sqr = True)
    hf.export(export_directory = None, export_name = None)
