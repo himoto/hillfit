@@ -120,5 +120,5 @@ Hillfit is executed through the following sequence of the aforementioned functio
 
    import hillfit
    hf = hillfit.HillFit(x_data, y_data)
-   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, log_x = False, view_figure = True, , print_r_sqr = True)
+   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, log_x = False, view_figure = True, print_r_sqr = True)
    hf.export(export_directory = None, export_name = None)
