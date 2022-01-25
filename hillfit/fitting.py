@@ -56,7 +56,7 @@ class HillFit(object):
         y_label,
         title,
         sigfigs,
-        log_y,
+        log_x,
         print_r_sqr,
         view_figure,
         *params,
@@ -68,12 +68,10 @@ class HillFit(object):
         plt.rcParams["figure.figsize"] = (11, 7)
         plt.rcParams["figure.dpi"] = 150
         self.figure, self.ax = plt.subplots()
-        if log_y:
-            y_fit = -np.log10(1 - y_fit)
-            self.y_data = -np.log10(1 - self.y_data)
-            print_r_sqr = False
         self.ax.plot(x_fit, y_fit, label="Hill fit")
         self.ax.scatter(self.x_data, self.y_data, label="raw_data")
+        if log_x:
+            self.ax.set_xscale("log")
         self.ax.set_xlabel(x_label)
         self.ax.set_ylabel(y_label)
         self.ax.set_title(title)
@@ -102,7 +100,7 @@ class HillFit(object):
         y_label: str = "y",
         title: str = "Fitted Hill equation",
         sigfigs: int = 6,
-        log_y: bool = False,
+        log_x: bool = False,
         print_r_sqr: bool = True,
         view_figure: bool = True,
     ):
@@ -120,7 +118,7 @@ class HillFit(object):
             y_label,
             title,
             sigfigs,
-            log_y,
+            log_x,
             print_r_sqr,
             view_figure,
             *params,
