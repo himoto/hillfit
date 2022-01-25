@@ -114,7 +114,7 @@ The fitted Hill equation, with its data points and parameters, and the regressio
 Execution
 +++++++++++
 
-Hillfit is executed through the following sequence of the aforementioned functions, which is exemplified in the `example Notebook of our GitHub repository <https://github.com/freiburgermsu/hillfit/tree/master/examples>`_:
+Hillfit is executed through the following sequence of the aforementioned functions, which is exemplified in the `example Notebook of our GitHub repository <./examples>`_:
 
 .. code-block:: python
 
