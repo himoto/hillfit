@@ -49,7 +49,17 @@ class HillFit(object):
         return [float(param) for param in popt]
 
     def regression(
-        self, x_fit, y_fit, x_label, y_label, title, sigfigs, print_r_sqr, view_figure, *params
+        self,
+        x_fit,
+        y_fit,
+        x_label,
+        y_label,
+        title,
+        sigfigs,
+        log_x,
+        print_r_sqr,
+        view_figure,
+        *params,
     ) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
@@ -60,6 +70,8 @@ class HillFit(object):
         self.figure, self.ax = plt.subplots()
         self.ax.plot(x_fit, y_fit, label="Hill fit")
         self.ax.scatter(self.x_data, self.y_data, label="raw_data")
+        if log_x:
+            self.ax.set_xscale("log")
         self.ax.set_xlabel(x_label)
         self.ax.set_ylabel(y_label)
         self.ax.set_title(title)
@@ -88,6 +100,7 @@ class HillFit(object):
         y_label: str = "y",
         title: str = "Fitted Hill equation",
         sigfigs: int = 6,
+        log_x: bool = False,
         print_r_sqr: bool = True,
         view_figure: bool = True,
     ):
@@ -105,6 +118,7 @@ class HillFit(object):
             y_label,
             title,
             sigfigs,
+            log_x,
             print_r_sqr,
             view_figure,
             *params,
