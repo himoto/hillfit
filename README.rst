@@ -114,11 +114,11 @@ The fitted Hill equation, with its data points and parameters, and the regressio
 Execution
 +++++++++++
 
-Hillfit is executed through the following sequence of the aforementioned functions, which is exemplified in the `example Notebook of our GitHub repository <https://github.com/freiburgermsu/hillfit/tree/master/examples>`_:
+Hillfit is executed through the following sequence of the aforementioned functions, which is exemplified in the `example Notebook of our GitHub repository <./examples>`_:
 
 .. code-block:: python
 
    import hillfit
    hf = hillfit.HillFit(x_data, y_data)
-   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, log_x = False, view_figure = True, , print_r_sqr = True)
+   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, log_x = False, view_figure = True, print_r_sqr = True)
    hf.export(export_directory = None, export_name = None)
