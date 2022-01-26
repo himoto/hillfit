@@ -71,7 +71,7 @@ class HillFit(object):
         self.ax.plot(x_fit, y_fit, label="Hill fit")
         self.ax.scatter(self.x_data, self.y_data, label="raw_data")
         if log_x:
-            self.ax.set_xscale('log')
+            self.ax.set_xscale("log")
         self.ax.set_xlabel(x_label)
         self.ax.set_ylabel(y_label)
         self.ax.set_title(title)
