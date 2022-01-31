@@ -23,8 +23,8 @@ class HillFit(object):
         self.ec50 = params[2]
         self.nH = params[3]
 
-        hilleq = self.bottom + (self.top - self.bottom) * x ** self.nH / (
-            self.ec50 ** self.nH + x ** self.nH
+        hilleq = self.bottom + (self.top - self.bottom) * x**self.nH / (
+            self.ec50**self.nH + x**self.nH
         )
         return hilleq
 
