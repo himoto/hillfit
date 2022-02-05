@@ -16,7 +16,7 @@ class HillFit(object):
     ) -> None:
         self.x_data = np.array(x_data)
         self.y_data = np.array(y_data)
-        if self.x_data[0] <= self.x_data[-1]:
+        if self.x_data[0] > self.x_data[-1]:
             raise ValueError(
                 "The first point {self.x_data[0]} and the last point {self.x_data[-1]} are not amenable with the scipy.curvefit function of HillFit."
             )
