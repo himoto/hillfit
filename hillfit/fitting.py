@@ -51,7 +51,7 @@ class HillFit(object):
             self.bottom = 0
         self.ec50 = params[2]
         self.nH = params[3]
-        
+
         return params
 
     def regression(
