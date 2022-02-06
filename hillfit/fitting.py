@@ -12,8 +12,8 @@ from sklearn.metrics import r2_score
 
 class HillFit(object):
     def __init__(
-                    self, x_data: Union[List[float], np.ndarray], y_data: Union[List[float], np.ndarray]
-                ) -> None:
+        self, x_data: Union[List[float], np.ndarray], y_data: Union[List[float], np.ndarray]
+    ) -> None:
         self.x_data = np.array(x_data)
         self.y_data = np.array(y_data)
         if self.x_data[0] > self.x_data[-1]:
@@ -26,7 +26,7 @@ class HillFit(object):
         self.bottom = params[1]
         self.ec50 = params[2]
         self.nH = params[3]
-        
+
         return self.bottom + (self.top - self.bottom) * x ** self.nH / (
             self.ec50 ** self.nH + x ** self.nH
         )
@@ -51,22 +51,22 @@ class HillFit(object):
         )
         if not bottom_param:
             popt[1] = 0
-            
+
         return [float(param) for param in popt]
 
     def regression(
-                    self,
-                    x_fit,
-                    y_fit,
-                    x_label,
-                    y_label,
-                    title,
-                    sigfigs,
-                    log_x,
-                    print_r_sqr,
-                    view_figure,
-                    *params,
-                ) -> None:
+        self,
+        x_fit,
+        y_fit,
+        x_label,
+        y_label,
+        title,
+        sigfigs,
+        log_x,
+        print_r_sqr,
+        view_figure,
+        *params,
+    ) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
 
@@ -101,16 +101,16 @@ class HillFit(object):
             self.figure.show()
 
     def fitting(
-                    self,
-                    x_label: str = "x",
-                    y_label: str = "y",
-                    title: str = "Fitted Hill equation",
-                    sigfigs: int = 6,
-                    log_x: bool = False,
-                    bottom_param: bool = True,
-                    print_r_sqr: bool = True,
-                    view_figure: bool = True,
-                ):
+        self,
+        x_label: str = "x",
+        y_label: str = "y",
+        title: str = "Fitted Hill equation",
+        sigfigs: int = 6,
+        log_x: bool = False,
+        bottom_param: bool = True,
+        print_r_sqr: bool = True,
+        view_figure: bool = True,
+    ):
         self.x_fit = np.logspace(
             np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data)
         )
@@ -132,8 +132,8 @@ class HillFit(object):
         )
 
     def export(
-                self, export_directory: Optional[str] = None, export_name: Optional[str] = None
-            ) -> None:
+        self, export_directory: Optional[str] = None, export_name: Optional[str] = None
+    ) -> None:
         # define the unique export path
         if export_directory is None:
             export_directory = os.getcwd()
