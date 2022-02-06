@@ -16,23 +16,15 @@ class HillFit(object):
     ) -> None:
         self.x_data = np.array(x_data)
         self.y_data = np.array(y_data)
-        if self.x_data[0] <= self.x_data[-1]:
+        if self.x_data[0] > self.x_data[-1]:
             raise ValueError('The first point {self.x_data[0]} and the last point {self.x_data[-1]} are not amenable with the scipy.curvefit function of HillFit.')
 
-    def _equation(self, x: np.ndarray, bottom_param, *params) -> np.ndarray:
-        self.top = params[0]
-        self.bottom = 0
-        if bottom_param:
-            self.bottom = params[1]
-        self.ec50 = params[2]
-        self.nH = params[3]
-
-        hilleq = self.bottom + (self.top - self.bottom) * x ** self.nH / (
+    def _equation(self, x: np.ndarray) -> np.ndarray:
+        return self.bottom + (self.top - self.bottom) * x ** self.nH / (
             self.ec50 ** self.nH + x ** self.nH
         )
-        return hilleq
 
-    def _get_param(self) -> List[float]:
+    def _get_param(self, bottom_param) -> List[float]:
         min_data = np.amin(self.y_data)
         max_data = np.amax(self.y_data)
 
@@ -50,7 +42,15 @@ class HillFit(object):
             p0=param_initial,
             bounds=param_bounds,
         )
-        return [float(param) for param in popt]
+        params = [float(param) for param in popt]
+        self.top = params[0]
+        self.bottom = params[1]
+        if bottom_param:
+            self.bottom = 0
+        self.ec50 = params[2]
+        self.nH = params[3]
+        
+        return params
 
     def regression(
         self,
@@ -112,8 +112,8 @@ class HillFit(object):
         self.x_fit = np.logspace(
             np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data)
         )
-        params = self._get_param()
-        self.y_fit = self._equation(self.x_fit, bottom_param, *params)
+        params = self._get_param(bottom_param)
+        self.y_fit = self._equation(self.x_fit)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
         self.regression(
