@@ -28,7 +28,7 @@ class HillFit(object):
 
     def _equation(self, x: np.ndarray, *params) -> np.ndarray:
         self.top = params[0]
-        self.bottom = params[1]
+        self.bottom = params[1] if self.bottom_param else 0
         self.ec50 = params[2]
         self.nH = params[3]
 
