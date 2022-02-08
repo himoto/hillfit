@@ -12,10 +12,15 @@ from sklearn.metrics import r2_score
 
 class HillFit(object):
     def __init__(
-        self, x_data: Union[List[float], np.ndarray], y_data: Union[List[float], np.ndarray]
+        self,
+        x_data: Union[List[float], np.ndarray],
+        y_data: Union[List[float], np.ndarray],
+        *,
+        bottom_param: bool = True,
     ) -> None:
         self.x_data = np.array(x_data)
         self.y_data = np.array(y_data)
+        self.bottom_param = bottom_param
         if self.x_data[0] > self.x_data[-1]:
             raise ValueError(
                 "The first point {self.x_data[0]} and the last point {self.x_data[-1]} are not amenable with the scipy.curvefit function of HillFit."
@@ -31,7 +36,7 @@ class HillFit(object):
             self.ec50 ** self.nH + x ** self.nH
         )
 
-    def _get_param(self, bottom_param) -> List[float]:
+    def _get_param(self) -> List[float]:
         min_data = np.amin(self.y_data)
         max_data = np.amax(self.y_data)
 
@@ -49,7 +54,7 @@ class HillFit(object):
             p0=param_initial,
             bounds=param_bounds,
         )
-        if not bottom_param:
+        if not self.bottom_param:
             popt[1] = 0
 
         return [float(param) for param in popt]
@@ -107,14 +112,13 @@ class HillFit(object):
         title: str = "Fitted Hill equation",
         sigfigs: int = 6,
         log_x: bool = False,
-        bottom_param: bool = True,
         print_r_sqr: bool = True,
         view_figure: bool = True,
     ):
         self.x_fit = np.logspace(
             np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data)
         )
-        params = self._get_param(bottom_param)
+        params = self._get_param()
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
