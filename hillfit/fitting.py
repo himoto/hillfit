@@ -12,21 +12,29 @@ from sklearn.metrics import r2_score
 
 class HillFit(object):
     def __init__(
-        self, x_data: Union[List[float], np.ndarray], y_data: Union[List[float], np.ndarray]
+        self,
+        x_data: Union[List[float], np.ndarray],
+        y_data: Union[List[float], np.ndarray],
+        *,
+        bottom_param: bool = True,
     ) -> None:
         self.x_data = np.array(x_data)
         self.y_data = np.array(y_data)
+        self.bottom_param = bottom_param
+        if self.x_data[0] > self.x_data[-1]:
+            raise ValueError(
+                "The first point {self.x_data[0]} and the last point {self.x_data[-1]} are not amenable with the scipy.curvefit function of HillFit."
+            )
 
     def _equation(self, x: np.ndarray, *params) -> np.ndarray:
         self.top = params[0]
-        self.bottom = params[1]
+        self.bottom = params[1] if self.bottom_param else 0
         self.ec50 = params[2]
         self.nH = params[3]
 
-        hilleq = self.bottom + (self.top - self.bottom) * x ** self.nH / (
+        return self.bottom + (self.top - self.bottom) * x ** self.nH / (
             self.ec50 ** self.nH + x ** self.nH
         )
-        return hilleq
 
     def _get_param(self) -> List[float]:
         min_data = np.amin(self.y_data)
@@ -46,6 +54,9 @@ class HillFit(object):
             p0=param_initial,
             bounds=param_bounds,
         )
+        if not self.bottom_param:
+            popt[1] = 0
+
         return [float(param) for param in popt]
 
     def regression(
