@@ -65,6 +65,7 @@ The data environment, in a `Python IDE <https://www.simplilearn.com/tutorials/py
  hf = hillfit.HillFit(x_data, y_data)
 
 - *x_data* & *y_data* ``list`` or ``ndarray``: specifies the x-values & y-values, respectively, of the raw data that will be fitted with the Hill equation.
+- *bottom_param* ``bool``: specifies whether the accessory ``bottom`` parameter of the Hill equation will be employed in the regression.
 
 ++++++++++++++++
 fitting()
@@ -74,13 +75,13 @@ The parameterized data is fitted to the Hill equation, with the following argume
 
 .. code-block:: python
 
- hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, log_x = False, print_r_sqr = True, view_figure = True)
+ hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, 
+            log_x = False, bottom_param = True, print_r_sqr = True, view_figure = True)
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
 - *sigfigs* ``int``: specifies the number of `significant figures <https://en.wikipedia.org/wiki/Significant_figures>`_ that will be used in printed instances of the fitted Hill equation.
 - *log_x* ``bool``: specifies whether the x-axis of the regression plot will be converted into a logarithmic scale.
-- *print_r_sqr* ``bool``: specifies whether the coefficient of determination (R\ :sup:`2`\) regression plot will be printed in the Python environment.
 - *view_figure* ``bool``: specifies whether the regression plot will be printed in the Python environment.
 - *print_r_sqr* ``bool``: specifies whether the coefficient of determination (R\ :sup:`2`\) regression plot will be printed in the Python environment.
 
