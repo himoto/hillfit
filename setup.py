@@ -7,8 +7,8 @@ from setuptools import find_packages, setup
 
 def get_version() -> str:
 
-    version_filepath = os.path.join(os.path.dirname(__file__), "hillfit", "__init__.py")
-    with open(version_filepath) as f:
+    init_filepath = os.path.join(os.path.dirname(__file__), "hillfit", "__init__.py")
+    with open(init_filepath) as f:
         for line in f:
             if line.startswith("__version__"):
                 return line.strip().split()[-1][1:-1]
@@ -28,7 +28,7 @@ def main():
         description="Model for fitting data with the Hill equation, and exporting the contents",
         long_description=readme,
         author=", ".join(["Andrew Freiburger", "Hiroaki Imoto"]),
-        author_email=", ".join(["andrewfreiburger@gmail.com", "himoto@protein.osaka-u.ac.jp"]),
+        author_email="andrewfreiburger@gmail.com",
         url="https://github.com/himoto/hillfit",
         keywords=[
             "biochemistry",
@@ -39,6 +39,14 @@ def main():
         ],
         install_requires=[
             l.strip() for l in Path("requirements.txt").read_text("utf-8").splitlines()
+        ],
+        classifiers=[
+            "Intended Audience :: Science/Research",
+            "License :: OSI Approved :: MIT License",
+            "Operating System :: OS Independent",
+            "Programming Language :: Python :: 3.7",
+            "Programming Language :: Python :: 3.8",
+            "Programming Language :: Python :: 3.9",
         ],
     )
 
