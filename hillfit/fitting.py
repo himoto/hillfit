@@ -34,6 +34,7 @@ class HillFit(object):
 
         return self.bottom + (self.top - self.bottom) * x ** self.nH / (
             self.ec50 ** self.nH + x ** self.nH
+            )
 
     def _get_param(self) -> List[float]:
         min_data = np.amin(self.y_data)
