@@ -110,10 +110,8 @@ class HillFit(object):
         print_r_sqr: bool = True,
         generate_figure: bool = True,
         view_figure: bool = True,
-        curve_fit_kws: Optional[dict] = None,
+        curve_fit_kws: Optional[dict] = {},
     ):
-        if curve_fit_kws is None:
-            curve_fit_kws = {}
         self.generate_figure = generate_figure
         self.x_fit = np.logspace(
             np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data)
