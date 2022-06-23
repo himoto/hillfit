@@ -36,7 +36,7 @@ class HillFit(object):
             self.ec50**self.nH + x**self.nH
         )
 
-    def _get_param(self) -> List[float]:
+    def _get_param(self, curve_fit_kws: dict) -> List[float]:
         min_data = np.amin(self.y_data)
         max_data = np.amax(self.y_data)
 
@@ -46,17 +46,11 @@ class HillFit(object):
             [max_data - 0.5 * h, min_data - 0.5 * h, self.x_data[0] * 0.1, 0.01],
             [max_data + 0.5 * h, min_data + 0.5 * h, self.x_data[-1] * 10, 100],
         )
-
-        popt, _ = curve_fit(
-            self._equation,
-            self.x_data,
-            self.y_data,
-            p0=param_initial,
-            bounds=param_bounds,
-        )
+        curve_fit_kws.setdefault("p0", param_initial)
+        curve_fit_kws.setdefault("bounds", param_bounds)
+        popt, _ = curve_fit(self._equation, self.x_data, self.y_data, **curve_fit_kws)
         if not self.bottom_param:
             popt[1] = 0
-
         return [float(param) for param in popt]
 
     def regression(
@@ -116,12 +110,15 @@ class HillFit(object):
         print_r_sqr: bool = True,
         generate_figure: bool = True,
         view_figure: bool = True,
+        curve_fit_kws: Optional[dict] = None,
     ):
+        if curve_fit_kws is None:
+            curve_fit_kws = {}
         self.generate_figure = generate_figure
         self.x_fit = np.logspace(
             np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data)
         )
-        params = self._get_param()
+        params = self._get_param(curve_fit_kws)
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
