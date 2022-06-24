@@ -84,6 +84,7 @@ The parameterized data is fitted to the Hill equation, with the following argume
 - *log_x* ``bool``: specifies whether the x-axis of the regression plot will be converted into a logarithmic scale.
 - *view_figure* ``bool``: specifies whether the regression plot will be printed in the Python environment.
 - *print_r_sqr* ``bool``: specifies whether the coefficient of determination (R\ :sup:`2`\) regression plot will be printed in the Python environment.
+- *curve_fit_kws* ``Optional[dict]``: Keyword arguments to pass to `scipy.optimize.curve_fit <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.htmlgit>`_.
 
 
 -----------------------------
