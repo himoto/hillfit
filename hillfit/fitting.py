@@ -53,8 +53,20 @@ class HillFit(object):
             popt[1] = 0
         return [float(param) for param in popt]
 
-    def _regression(self, x_fit, y_fit, x_label, y_label, title, sigfigs, log_x, print_r_sqr,
-        generate_figure, view_figure, *params) -> None:
+    def _regression(
+        self,
+        x_fit,
+        y_fit,
+        x_label,
+        y_label,
+        title,
+        sigfigs,
+        log_x,
+        print_r_sqr,
+        generate_figure,
+        view_figure,
+        *params,
+    ) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
 
@@ -99,8 +111,8 @@ class HillFit(object):
         print_r_sqr: bool = True,
         generate_figure: bool = True,
         view_figure: bool = True,
-        export:bool=True,
-        export_directory: Optional[str] = None, 
+        export: bool = True,
+        export_directory: Optional[str] = None,
         export_name: Optional[str] = None,
         curve_fit_kws: Optional[dict] = None,
     ):
@@ -114,14 +126,28 @@ class HillFit(object):
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
-        self._regression(self.x_fit, self.y_fit, x_label, y_label, title,
-            sigfigs, log_x, print_r_sqr, generate_figure, view_figure, *params)
+        self._regression(
+            self.x_fit,
+            self.y_fit,
+            x_label,
+            y_label,
+            title,
+            sigfigs,
+            log_x,
+            print_r_sqr,
+            generate_figure,
+            view_figure,
+            *params,
+        )
         if export:
             self.export(export_directory, export_name, generate_figure)
 
     def export(
-        self, export_directory: Optional[str]=None, export_name: Optional[str]=None, figure=True
-) -> None:
+        self,
+        export_directory: Optional[str] = None,
+        export_name: Optional[str] = None,
+        figure=True,
+    ) -> None:
         # define the unique export path
         if export_directory is None:
             export_directory = os.getcwd()
