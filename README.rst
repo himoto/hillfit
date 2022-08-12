@@ -108,7 +108,7 @@ The fitted Hill equation, with its data points and parameters, and the regressio
 
 .. code-block:: python
 
-   hf.export(export_name=None, export_directory=None, figure=True)
+   hf.export(export_directory=None, export_name=None, figure=True)
 
 - *export_name* & *export_directory* ``str``: optionally specifies the folder and the directory to where the contents folder will be exported, where `None` design a unique folder name for the information in the current working directory.
 - *figure* ``bool``: specifies whether a figure will be exported with the fitted content.
