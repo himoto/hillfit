@@ -32,9 +32,9 @@ class HillFit(object):
         self.ec50 = params[2]
         self.nH = params[3]
 
-        return self.bottom + (self.top - self.bottom) * x ** self.nH / (
-            self.ec50 ** self.nH + x ** self.nH
-            )
+        return self.bottom + (self.top - self.bottom) * x**self.nH / (
+            self.ec50**self.nH + x**self.nH
+        )
 
     def _get_param(self) -> List[float]:
         min_data = np.amin(self.y_data)
@@ -85,7 +85,7 @@ class HillFit(object):
                 x_coordinate = 0.8 * x_fit[-1]
                 if x_coordinate < x_fit[0]:
                     x_coordinate = 2 * x_fit[0]
-    
+
                 self.ax.text(
                     x_coordinate,
                     y_coordinate,
