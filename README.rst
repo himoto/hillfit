@@ -76,7 +76,7 @@ The parameterized data is fitted to the Hill equation, with the following argume
 .. code-block:: python
 
  hf.fitting(x_label='x', y_label='y', title='Fitted Hill equation', sigfigs=6, log_x=False, print_r_sqr=True, 
-            generate_figure=True, view_figure=True, export_directory=None, export_name=None, figure=True)
+            generate_figure=True, view_figure=True, export_directory=None, export_name=None, figure=True, curve_fit_kws:Optional[dict]=None)
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
@@ -86,6 +86,7 @@ The parameterized data is fitted to the Hill equation, with the following argume
 - *print_r_sqr* ``bool``: specifies whether the coefficient of determination (R\ :sup:`2`\) regression plot will be printed in the Python environment.
 - *export_name* & *export_directory* ``str``: optionally specifies the folder and the directory to where the contents folder will be exported, where `None` design a unique folder name for the information in the current working directory.
 - *figure* ``bool``: specifies whether a figure will be exported with the fitted content.
+- *curve_fit_kws* ``Optional[dict]``: Keyword arguments to pass to `scipy.optimize.curve_fit <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.htmlgit>`_.
 
 -----------------------------
 Accessible content
