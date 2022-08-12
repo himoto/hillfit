@@ -62,7 +62,7 @@ The data environment, in a `Python IDE <https://www.simplilearn.com/tutorials/py
 .. code-block:: python
 
  import hillfit
- hf = hillfit.HillFit(x_data, y_data)
+ hf = hillfit.HillFit(x_data, y_data, bottom_param=True)
 
 - *x_data* & *y_data* ``list`` or ``ndarray``: specifies the x-values & y-values, respectively, of the raw data that will be fitted with the Hill equation.
 - *bottom_param* ``bool``: specifies whether the accessory ``bottom`` parameter of the Hill equation will be employed in the regression.
@@ -75,14 +75,14 @@ The parameterized data is fitted to the Hill equation, with the following argume
 
 .. code-block:: python
 
- hf.fitting(x_label = 'x', y_label = 'y', title = 'Fitted Hill equation', sigfigs = 6, 
-            log_x = False, bottom_param = True, print_r_sqr = True, view_figure = True)
+ hf.fitting(x_label='x', y_label='y', title='Fitted Hill equation', sigfigs=6, log_x=False, 
+            print_r_sqr=True, generate_figure=True, view_figure=True)
 
 - *x_label* & *y_label* ``str``: specifies the x-axis & y-axis labels, respectively, that will be applied to the regression plot for the raw data points and the fitted Hill equation.
 - *title* ``str``: specifies the title of the regression plot for the raw data points and the fitted Hill equation.
 - *sigfigs* ``int``: specifies the number of `significant figures <https://en.wikipedia.org/wiki/Significant_figures>`_ that will be used in printed instances of the fitted Hill equation.
 - *log_x* ``bool``: specifies whether the x-axis of the regression plot will be converted into a logarithmic scale.
-- *view_figure* ``bool``: specifies whether the regression plot will be printed in the Python environment.
+- *generate_figure* & *view_figure* ``bool``: specifies whether the regression plot will be generated and printed in the Python environment, respectively.
 - *print_r_sqr* ``bool``: specifies whether the coefficient of determination (R\ :sup:`2`\) regression plot will be printed in the Python environment.
 
 
@@ -115,11 +115,11 @@ The fitted Hill equation, with its data points and parameters, and the regressio
 Execution
 +++++++++++
 
-Hillfit is executed through the following sequence of the aforementioned functions, which is exemplified in the `example Notebook of our GitHub repository <./examples>`_:
+Hillfit is executed through the following example sequence of the aforementioned functions, which is exemplified in the `example Notebook of our GitHub repository <./examples>`_:
 
 .. code-block:: python
 
    import hillfit
    hf = hillfit.HillFit(x_data, y_data)
-   hf.fitting(x_label = 'test_x', y_label = 'test_y', title = 'Fitted Hill equation', sigfigs = 6, log_x = False, view_figure = True, print_r_sqr = True)
-   hf.export(export_directory = None, export_name = None)
+   hf.fitting(x_label='test_x', y_label='test_y', title='Fitted Hill equation', generate_figure=False)
+   hf.export(export_directory=None, export_name=None)

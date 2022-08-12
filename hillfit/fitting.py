@@ -59,24 +59,13 @@ class HillFit(object):
 
         return [float(param) for param in popt]
 
-    def regression(
-        self,
-        x_fit,
-        y_fit,
-        x_label,
-        y_label,
-        title,
-        sigfigs,
-        log_x,
-        print_r_sqr,
-        view_figure,
-        *params,
-    ) -> None:
+    def _regression(self, x_fit, y_fit, x_label, y_label, title, sigfigs, log_x, print_r_sqr,
+        generate_figure, view_figure, *params) -> None:
         corrected_y_data = self._equation(self.x_data, *params)
         self.r_2 = r2_score(self.y_data, corrected_y_data)
 
         # define the regression plot
-        if self.generate_figure:
+        if generate_figure:
             plt.rcParams["figure.figsize"] = (11, 7)
             plt.rcParams["figure.dpi"] = 150
             self.figure, self.ax = plt.subplots()
@@ -117,7 +106,6 @@ class HillFit(object):
         generate_figure: bool = True,
         view_figure: bool = True,
     ):
-        self.generate_figure = generate_figure
         self.x_fit = np.logspace(
             np.log10(self.x_data[0]), np.log10(self.x_data[-1]), len(self.y_data)
         )
@@ -125,7 +113,7 @@ class HillFit(object):
         self.y_fit = self._equation(self.x_fit, *params)
         self.equation = f"{round(self.bottom, sigfigs)} + ({round(self.top, sigfigs)}-{round(self.bottom, sigfigs)})*x**{(round(self.nH, sigfigs))} / ({round(self.ec50, sigfigs)}**{(round(self.nH, sigfigs))} + x**{(round(self.nH, sigfigs))})"
 
-        self.regression(
+        self._regression(
             self.x_fit,
             self.y_fit,
             x_label,
@@ -134,6 +122,7 @@ class HillFit(object):
             sigfigs,
             log_x,
             print_r_sqr,
+            generate_figure,
             view_figure,
             *params,
         )
