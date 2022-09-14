@@ -1,6 +1,6 @@
 import os
 import re
-from typing import List, Optional, Union
+from typing import Callable, List, Optional, Union
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -18,12 +18,31 @@ class HillFit(object):
         *,
         bottom_param: bool = True,
     ) -> None:
-        self.x_data = np.array(x_data)
-        self.y_data = np.array(y_data)
+        """Fitting the Hill Equation to Experimental Data.
+
+        The Hill equation is defined as follows:
+
+        y = bottom + ((top - bottom) * x^nH) / (EC50^nH+ x^nH)
+
+        where bottom is the minimum activity; top is maximum activity; EC50 is the half-maximum
+        effective dose; and nH is the Hill coefficient. The variables x & y are the stimuli dose
+        and the cellular or tissue response.
+
+        Parameters
+        ----------
+        x_data, y_data : Union[List[float], np.ndarray]
+            specifies the x-values & y-values, respectively, of the raw data that will be fitted
+            with the Hill equation.
+        bottom_param : bool, optional
+            whether the accessory bottom parameter of the Hill equation will be employed in the
+            regression.
+        """
+        self.x_data = np.array(x_data) if isinstance(x_data, list) else x_data
+        self.y_data = np.array(y_data) if isinstance(y_data, list) else y_data
         self.bottom_param = bottom_param
         if self.x_data[0] > self.x_data[-1]:
             raise ValueError(
-                "The first point {self.x_data[0]} and the last point {self.x_data[-1]} are not amenable with the scipy.curvefit function of HillFit."
+                f"The first point {self.x_data[0]} and the last point {self.x_data[-1]} are not amenable with the scipy.curvefit function of HillFit."
             )
 
     def _equation(self, x: np.ndarray, *params) -> np.ndarray:
