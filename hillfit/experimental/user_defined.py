@@ -173,5 +173,5 @@ class UserDefined(object):
                 f"{arg_names[i]} = {val}" for i, val in enumerate(params)
             ],
         )
-        with open(os.path.join(export_path, "equation.txt"), "w") as output:
+        with open(os.path.join(export_path, "popt.txt"), "w") as output:
             output.writelines(string)
