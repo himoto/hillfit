@@ -134,6 +134,7 @@ def test_fitting():
 
     # affirm module qualities
     x = 6
+    assert isinstance(x, int)
     assert eval(hf.equation)
     assert isinstance(hf.equation, str)
     assert isinstance(hf.x_fit, np.ndarray)
