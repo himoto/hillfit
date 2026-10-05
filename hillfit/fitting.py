@@ -95,7 +95,7 @@ class HillFit(object):
                 self.ax.text(
                     x_coordinate,
                     y_coordinate,
-                    "R\N{superscript two}: " + f"{round(self.r_2, sigfigs)}",
+                    "R\N{SUPERSCRIPT TWO}: " + f"{round(self.r_2, sigfigs)}",
                 )
 
             if view_figure:
@@ -184,7 +184,7 @@ class HillFit(object):
         formatted_equation = re.sub("(\*\*)", "^", self.equation)
         string = "\n".join(
             [
-                f"Fitted Hill equation (R\N{superscript two} of {round(self.r_2, 6)}): {formatted_equation}",
+                f"Fitted Hill equation (R\N{SUPERSCRIPT TWO} of {round(self.r_2, 6)}): {formatted_equation}",
                 f"top = {self.top}",
                 f"bottom = {self.bottom}",
                 f"ec50 = {self.ec50}",
